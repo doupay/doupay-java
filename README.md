@@ -1,5 +1,5 @@
 ## 该项目支持maven,使用方法如下:
-### 1.将 JitPack存储库添加到您的构建文件
+### 1.将 JitPack存储库添加到您的构建文件pom.xml
 
 ```javascript
  <repositories>
