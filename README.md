@@ -26,6 +26,6 @@
 
 ### 项目中调用初始化方法,示例如下:
 
-<img width="1178" alt="步骤2" src="https://user-images.githubusercontent.com/86946898/124469236-aff3f600-ddcc-11eb-9c21-554e901a1ee9.png">
+![Uploading WX20210709-170532@2x.png…]()
 
 sdk中各方法请求和响应参数,请参照[wiki](https://github.com/doupay/doupay-java/wiki)
