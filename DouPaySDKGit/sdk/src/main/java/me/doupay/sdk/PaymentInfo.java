@@ -394,21 +394,65 @@ public class PaymentInfo {
     }
 
     /**
+     *提现
+     * @param address              地址
+     * @param amount               数量【最小0.000001】
+     * @param coinCode             币种【长度4】
+     * @param merchantUser     	   商家用户【长度10到20之间】
+     * @param orderNo              订单号【长度10到30】
+     * @param listener             回调
+     */
+    public  static void withdraw(String address,String amount,String coinCode,String merchantUser,String orderNo,CallBackListener<WithdrawResponse> listener) {
+        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+            listener.onError(9999,"请先调用Constants.getInstance().init()");
+            return;
+        }
+
+        if (address == null  || amount == null  || coinCode == null || merchantUser == null || orderNo == null) {
+            listener.onError(9999,"缺少必要参数");
+            return;
+        }
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("address",address);
+        map.put("amount",amount);
+        map.put("appId",Constants.getAppId());
+        map.put("coinCode",coinCode);
+        map.put("merchantUser",merchantUser);
+        map.put("orderNo",orderNo);
+        ServerApi.SERVICE_API.withdraw(Constants.basrUrl + "trade/withdrawal",map).subscribe(new BaseVoObserver<WithdrawResponse>(){
+            @Override
+            public void onPlaintextSuccess(WithdrawResponse data) {
+                if (listener != null) {
+                    listener.onFinish(data);
+                }
+            }
+
+            @Override
+            public void onError(int errorCode, String msg) {
+                if (listener != null) {
+                    listener.onError(errorCode,msg);
+                }
+            }
+        });
+
+    }
+
+    /**
      * 获取账单
-     * @param appId appId
      * @param startTime 开始时间
      * @param endTime 结束时间
      * @param pageSize 数量
      * @param pageNo 页数
      * @param listener 回调
      */
-    public  static void getBillRecords(String appId, LocalDateTime startTime,LocalDateTime endTime,Integer pageSize,Integer pageNo, CallBackListener<BillRecord> listener) {
-        if (appId == null) {
-            listener.onError(9999,"缺少必要参数");
+    public  static void getBillRecords( LocalDateTime startTime,LocalDateTime endTime,Integer pageSize,Integer pageNo, CallBackListener<BillRecord> listener) {
+        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+            listener.onError(9999,"请先调用Constants.getInstance().init()");
             return;
         }
         Map<String,Object> map = new HashMap<>();
-        map.put("appId",appId);
+        map.put("appId",Constants.getAppId());
         map.put("pageSize",pageSize);
         map.put("pageNo",pageNo);
         if (startTime != null) {
@@ -442,7 +486,7 @@ public class PaymentInfo {
      * @param bodyString  body体内容
      * @param listener 回调结果
      */
-    public  static void verifySignAndGetResult (String headerSignString,String bodyString,CallBackListener<PaymentResultResponse> listener) {
+    public  static void verifySignAndGetResult (String headerSignString,String bodyString,CallBackListener<PaymentCallBackResponse> listener,CallBackListener<UserWithdrawCallBackResponse> withdrawCalllBack) {
         if (Constants.getSecret().isEmpty() || Constants.getPublicKey().isEmpty()) {
             listener.onError(9999,"请先调用Constants.getInstance().init()");
             return;
@@ -451,27 +495,42 @@ public class PaymentInfo {
             listener.onError(9999,"请传入签名和body体");
             return;
         }
+
         // 拼接成a=b,c=d的形式
         String signString = generateClearTextSign(bodyString);
         // 验证签名
         boolean isRight = RSAUtils.verifySign(Constants.getPublicKey(), signString, headerSignString);
 
-        if (!isRight) { // 验签失败
-            listener.onError(9999,"验签失败");
-            return;
-        }
-
         JSONObject jsonObject = new JSONObject(bodyString);
-        String orderCode = jsonObject.getString("orderCode");
-        String coinName = jsonObject.getString("coinName");
-        String address = jsonObject.getString("address");
-        String amount = jsonObject.getString("amountPaid");
-        String protocolName = jsonObject.getString("protocolName");
-        Integer paymentStatus = jsonObject.getInt("paymentStatus");
-        boolean result = jsonObject.getBoolean("result");
+        String type = jsonObject.getString("orderType");
 
-        PaymentResultResponse resultResponse = new PaymentResultResponse(orderCode,coinName,address,amount,protocolName,paymentStatus,result);
-        listener.onFinish(resultResponse);
+        if (type.equals("payment")) { /// 用户付款
+            if (!isRight) { // 验签失败
+                listener.onError(9999,"验签失败");
+                return;
+            }
+            String orderCode = jsonObject.getString("orderCode");
+            String coinName = jsonObject.getString("coinName");
+            String address = jsonObject.getString("address");
+            String amount = jsonObject.getString("amountPaid");
+            String protocolName = jsonObject.getString("protocolName");
+            Integer paymentStatus = jsonObject.getInt("paymentStatus");
+            boolean result = jsonObject.getBoolean("result");
+            PaymentCallBackResponse resultResponse = new PaymentCallBackResponse(orderCode,coinName,address,amount,protocolName,paymentStatus,result);
+            listener.onFinish(resultResponse);
+        }else if (type.equals("withdraw")) { /// 用户提币
+            if (!isRight) { // 验签失败
+                withdrawCalllBack.onError(9999,"验签失败");
+                return;
+            }
+            String orderCode = jsonObject.getString("orderCode");
+            String coinCode = jsonObject.getString("coinCode");
+            String address = jsonObject.getString("address");
+            String amount = jsonObject.getString("amount");
+            boolean result = jsonObject.getBoolean("result");
+            UserWithdrawCallBackResponse userWithdrawCallBackResponse = new UserWithdrawCallBackResponse(orderCode,type,coinCode,address,amount,result);
+            withdrawCalllBack.onFinish(userWithdrawCallBackResponse);
+        }
 
     }
 

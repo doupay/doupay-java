@@ -71,4 +71,11 @@ public interface ServerApi {
          * 取消订单
          * */
     Observable<BaseVo<PayResponseData>> cancleOrder(@Url String url, @FieldMap Map<String, Object> body);
+
+    @FormUrlEncoded
+    @POST()
+        /*
+         * 用户提现
+         * */
+    Observable<BaseVo<WithdrawResponse>> withdraw(@Url String url, @FieldMap Map<String, Object> body);
 }

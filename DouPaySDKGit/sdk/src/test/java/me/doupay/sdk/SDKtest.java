@@ -13,10 +13,35 @@ public class SDKtest {
 
     public  static  void  initAllParameters() {
         String timeStamp = "1610697341483";
-        String appId = "502808ee5427490abb40375022e28578";
-        String secret = "c67100f61bfc684a8a288190026b53fb";
-        String privateKey="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCQvYSsFqKCNv2tzjsoPIgpDhR+01URpjvyUbyinKhCdDZuTY2AvlbmqPtMBBtKrUxvKl/0G9VQS4mfI8Gel8c9SrSVtPzagjVIypSMiRKU8xsNtNLc1ZM7Tl59bgJVeZPnPUsRvL1ckbFQTLMKxViPXT0DILE6Rf4cUNeIG3pTdyF07uRxpMpCG7geHyp0OlYLVzlrMWSqaxW1Xp7X/wia72kez5NGfo3UK4QHtc/AQ63F2YHlRDKVw9DMcdEA+ZodE3LZmCEXtFQCxiBEY9jqY7568KY2DP6p8OpXugYts4L/9lAQWAMkqWWByjsRr9fE3ejt2h5+vrY1FYUbm5X1AgMBAAECggEAa9X3Eatveep0h9h9tJWcsFHALVlQKO0b/oatLs3eglxI7Vc0VLX60rEVQOZSWwnQR4ZfpORTwhX1O66NI5ZbJ6wP7PXB6R5Xipr7n9TEFlslTcnpzAQHRIk31uVuMbZ53i+JTXa78krNu1DZl+299Fn4CeuCfzMEhp4oZkxqj+GrzImfXxBxov6Afbf56KSgjnpKARP9NG8imuPcIoqPEXGLz1urpAHzfhShdSbw2uYDTrBD/jwBES/9zWJZAy4w6RxKapDa8VrP3q9wN6B6QjkQLgBFdpogGlct0gQxaQLYUqyPq0Wu0iJ5uaeCCI7TlZMOYt3xQPtqhz/IBr3MhQKBgQD02hFwVy/MisakrZ6c3HQb2pe9r5h1jkJnMxCMIgpVMy8vB8R7JA/7CVG2GkPn0/gMermgo54sl7U5Dga0WjSua5IARTxbuLxUbkEx6q3D/Y7rdhLOhKYfDRGevFuSyHIBVyZT1WMwSD5ScocAupr4zQfV8OTeO4taABoGa12KgwKBgQCXVJM+nFO8faygUq7Jr1VkQnxhgWEQKN8UiaSKX/o9TSpoJniRcYkEOCP4FRcmShPiqNW9hHx/THiUfxZgsT0Jj6k5NMREPXDn8S1c63PaTgDhDd8mnyyRT7Wji/cGbIbOhONUhJ+4AzcEdmF3RiMKxBr9Bo0NDfRWLeRp6w3UJwKBgQDLobBvJZNzINcjjeEjw5QsthcMgkThP3aqLSXN5WGCihbrniIh51QDCzURpbZjzz2z4z0OBAVAQMtOsAOTapH1nTDHWM1h2rmF3kwKH4p0PSPnX0M0zcz6dfv5b90YretiggA2KHldZjeuieENEiRgVuP1YWp2CD9UklESlagt0QKBgGUSJKHNkRO0MCaH8ptbkkG7Mg2Bds1vLsctwwp0XdKxhiA3iZFCbgu2XzejBmoZUbyxnMfOA8SV03cChnSgC68mFxTRDECzdIRFDVIhI6hrLqUhOag26XJH9X28zoio1UR7dsWNKouhAg7l7eTWoDLhlVDnHi/Y4Rbp4cNoLT1DAoGAShOsIiWzCaJFXpSH1SwL925QURbU8N+N7rZT1xIWqJi/aBMpYQInvEKgvj7EV75JEGGFPokcO0TElLDR1gZqiq2WgDk9pu1aPPcc5sjnKQ+K0bEYxeheBT9CkJB3sSrJwhdlVcp9gLqgJq39SaNSmjbwszLCQp7KoEOxGTsNXQo=";
-        String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyGYiPsdiHNqLsUerHgYI/5Lk3zTMXBm3XsbLMOntBe5/vwYQK1f+9cZEDB1t9YgzOda21rsss2cb/bbH6k41wjt5M59f2OHuokhfse0SuPSejpaM0lRAQP7AU74tu1JmxnfETwnz5Z+b2hjEaSbnLYBU/oAMmywmHAa8YlIzETJ67RELjEhT7LoXHnObfguGUhtR0NLSTwBxXrrPaojaizCLIS8L8osoicm42BUo0yozQ8q1/CeJ5taWLUNTtblOGa6ARmSgcyA6GRzvd15la0upvzCh6Qe1oM36t7ET84FXBGjhabbfbrlNqthX7qsSr4xewhUdPK6cM2Oh64s3mwIDAQAB";
+        String appId = "doupay_JEPwPEB2MD";
+        String secret = "000d5f84f5a49bc3305fc18bb265afc5";
+        String privateKey="MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCPxHn5ySq3Mq8o\n" +
+                "MU0QO7Zw7LIzhRdvxdUiuCInlvXntuNbi5XL7WKD8fA2kp1b07BnLMgej+6DuF0V\n" +
+                "OMHkDDf3zb+uHqRsf8zpX5VwqxQMTYu0K3P69FJ6aSdJNLxF4JvslwRbZW7Ncv9l\n" +
+                "1Z1XaDrZfClqQaDUZnsp21XAjlvqKHYnKngvyIlDQcpV4vDOp7TkNTQjUwchIiTm\n" +
+                "d4cao4YYYqwhAsTJYcYkPWLgqPjaVkPlWwnYeLB3p6IokMQz44KFnkhdoYCj3wB3\n" +
+                "vmeX6AIJad0+6LrABYOA1d9BZimv5AXzSKmT8tnfSQsoA0a3gIKI+npqL9ErejfB\n" +
+                "GVUezbW1AgMBAAECggEALkconGdNALun9mAoVlliWOdYVY06BhjAivSKygOmFHii\n" +
+                "pw0/ou0/EQoIMQjw7mYuGognwu7B8FSgYfxrLWVhfrsUQJBMjUB2TYkfKa1oPq2X\n" +
+                "kt+J7fZHtm+y3bXEBRpQFtBl7qWwDSI/ZCBnDYPXrbpx+mo1wylZ7BdWey1YGP9+\n" +
+                "m/dFrqiFZwwXef7GyBMDPr37c0gjXblqkwVz3rNR6qCc3MQi+zXwyhbJAuSAVBab\n" +
+                "RcODWZqD1S0ZLw5L0BOWvGJnB2+BAdWQ+BaAJmtRLBTcEvRbvdL1VBX/L+vyAVRe\n" +
+                "c8J6Cjt1KyAEDa/18bL3ih5SLgHdwT7YIiEJdv0P4QKBgQDwe6kTlGiD70kAEmgo\n" +
+                "VvOMpqivP1SDhrbQScbzzFGLfiMA4HbhyuZoDw8304/otSW5CkEkaJ19L2DglNno\n" +
+                "Rv9q8C7xY3g0BjuOeQNx5P484k6L6GyRRYRhWS8POVEMXGqnyLNgfPZs8NDohaKm\n" +
+                "G/IFT24WjwufVipDFnjyPqAdKwKBgQCZC0CGBw8BvcVbCHnmYdbGQ/D4ZoX1BMLL\n" +
+                "xcEXrDTY8NA6L4uZOJ8kOQIOZGcsY25LBXFaEKWL0rOBdCtq2M18pPQzbHE67lRK\n" +
+                "gw6K8r/vAGVKcokvwyLUmXxyLjJoylHb4iZyY4P03Fl3zSQaOpAHBEcF1H2oItLN\n" +
+                "iA1EMrbInwKBgQDc4ni2R0aIiK0gp8eL5fHmat3duenCtWYNgvZ+0FjGK6GzGHmZ\n" +
+                "g2iGg+6SdHxmXpy7jbOv4XdmmLH/Fjngo/XPH7W+eoLaJi9l+bk0UAVFnwhOcbnm\n" +
+                "5Vdmoygab6cGF4zPeAVqxt0By1/Xc4el011Fi2OuzMz8GYTQAkAtIWCn6QKBgGPI\n" +
+                "zFcWvxgZjVXfXutxG0HGBpVO80RfyEpoM4+lvgc8a+ekHFbYbhqF+Os9V2+/nKfZ\n" +
+                "cqCQff9+b3+WKMDPfpsoSfhFWkZcIiU68f5ya+X+0gwKRZwYlNsc/+DKch+U2m6N\n" +
+                "Mxgd/mlmSgcsf7+CM2n/xfbtJsi7e8p6THwMvNRtAoGBANPQjWcXbVeSUpVONYOu\n" +
+                "j1vTFIDx2yamETbA556r2hipkFfLdAYGiVkPlgCPOwOuQgM+fy+ymSXMR98JreWe\n" +
+                "WjoRUd3nh9VueSNXUty2qvlF1QEdcYfFJW/Q5agbwgZaoMTbefbroZou0MNjaVW8\n" +
+                "cFg70chkOBG0fvyiKS/6A81w";
+        String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA8EDijmSxmDT2rvH8+HYo5uLbSmiNvUfPE2/LFYt9Tt183uEDa6bnlCDGQIa1srhhVJACXiUXSL4/QmcE+vF6odzloVjG9kT/jZpa9wv6MEvyDJXzIBCxVRNJ9MrcTbM3alsf3dCIqUIgNziZTYCheiF7uPB3nRPmLTLFp12WCEtM4kqKBBMq1jX3hfEqFwg5iVryHDRdxQJNI6KzIYT0haL5RANhBon7IFArajPYieaeSE+hqkwqsP6G+qTSng6SfLdCw324up/KP9dFB/7kQchiYvcMvUeD8IL2J7NemhM6vQ5Rx+g/Y9bPDvnZ0kWSZBBAdHyJf7kIwboapE05NQIDAQAB";
 
         Constants.openSysLog = true;
         Constants.getInstance().init(secret,privateKey,publicKey,appId,"200");
@@ -60,7 +85,7 @@ public class SDKtest {
     public void getPay() {
                  initAllParameters();
                 String orderNo = String.valueOf(System.currentTimeMillis());
-                PaymentInfo.pay("2", CoinCodeEnum.USDT, CurrencyCodeEnum.CNY, "17701278922", orderNo,
+                PaymentInfo.pay("5", CoinCodeEnum.USDT, CurrencyCodeEnum.CNY, "17701278888", orderNo,
                 "我很好啊啊", "", "", OrderTypeCodeEnum.CountBuy, new CallBackListener<PayResponseData>() {
                     @Override
                     public void onFinish(PayResponseData data) {
@@ -93,7 +118,7 @@ public class SDKtest {
     @Test
     public void getOrderInfo() {
         initAllParameters();
-        PaymentInfo.getOrderInfo("ZF202107051115409252689736", new CallBackListener<OrderInfoResponseData>() {
+        PaymentInfo.getOrderInfo("ZF202107061802551623157444", new CallBackListener<OrderInfoResponseData>() {
             @Override
             public void onFinish(OrderInfoResponseData data) {
                 System.out.println("++++++++++++++++" + data.toString());
@@ -120,10 +145,6 @@ public class SDKtest {
             @Override
             public void onError(int errorCode, String msg) {
                 System.out.println(errorCode + "-------------------------" + msg);
-                BigDecimal decimal = new BigDecimal("2");
-                if (decimal instanceof BigDecimal) {
-
-                }
             }
         });
     }
@@ -160,6 +181,23 @@ public class SDKtest {
         });
     }
 
+    @Test
+    public void withdraw() {
+        initAllParameters();
+        String orderNo = String.valueOf(System.currentTimeMillis());
+        PaymentInfo.withdraw("TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "0.02", "0004", orderNo, orderNo, new CallBackListener<WithdrawResponse>() {
+            @Override
+            public void onFinish(WithdrawResponse data) {
+                System.out.println("++++++++++++++++" + data.toString());
+            }
+
+            @Override
+            public void onError(int errorCode, String msg) {
+                System.out.println(errorCode + "-------------------------" + msg);
+            }
+        });
+    }
+
 
     @Test
     public void verifySignAndGetResult () {
@@ -167,16 +205,26 @@ public class SDKtest {
 
         String bodystring = "{\"address\":\"TQ1EgPhuDXLvDfycCBQadbfbLkBPhEDoZX\",\"amountPaid\":\"15.26717557\",\"coinName\":\"USDT\",\"orderCode\":\"ZF202106221133335640422688\",\"paymentStatus\":1,\"protocolName\":\"TRC20\",\"result\":true}";
         String headstring = "uCJasnGz3H+2Xi86zeRkoDVEaXpM0LsCInOW1Kk28pn/3bXMn/2vUac7aQrWUzcf8YjTiXJt03IzS6k0y04TsvL1rdOj7TZgrk2aav8wM79ECviDW1+OQWd2XRhCRJGL4ca5lnXiE+1eHV5Tdq68Nu50tOkTKGI6cD3LT6imEWq5bTB0I+xuabnhSDfhWdmogmzEwKju3xSPcjxtzHGJ/c8Zc1NYH7ID92qWi77Wm6/UskHiATgULXYCbLHL/hBFDn4kGH8E+FQ0oSoPOTLOvpKnI27v6xD7CyHhMUOYRaVm5u/X4YNta65hF//JVPLnMw8I9NJA9WklDPFZ1DvIQQ==";
-        PaymentInfo.verifySignAndGetResult(headstring, bodystring, new CallBackListener<PaymentResultResponse>() {
+        PaymentInfo.verifySignAndGetResult(headstring, bodystring, new CallBackListener<PaymentCallBackResponse>() {
             @Override
-            public void onFinish(PaymentResultResponse data) {
-            System.out.println("PaymentResultResponse = " + data.toString());
+            public void onFinish(PaymentCallBackResponse data) {
+                System.out.println("PaymentResultResponse = " + data.toString());
             }
 
             @Override
             public void onError(int errorCode, String msg) {
                 System.out.println("errorCode=" + errorCode + "msg =" + msg);
 
+            }
+        }, new CallBackListener<UserWithdrawCallBackResponse>() {
+            @Override
+            public void onFinish(UserWithdrawCallBackResponse data) {
+                System.out.println("UserWithdrawCallBackResponse = " + data.toString());
+            }
+
+            @Override
+            public void onError(int errorCode, String msg) {
+                System.out.println("errorCode=" + errorCode + "msg =" + msg);
             }
         });
     }
@@ -186,7 +234,7 @@ public class SDKtest {
         initAllParameters();
         LocalDateTime start =  LocalDateTime.now();
         LocalDateTime end = LocalDateTime.now();
-        PaymentInfo.getBillRecords("502808ee5427490abb40375022e28578", null, null, 10, 1, new CallBackListener<BillRecord>() {
+        PaymentInfo.getBillRecords( null, null, 10, 1, new CallBackListener<BillRecord>() {
             @Override
             public void onFinish(BillRecord data) {
 

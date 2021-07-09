@@ -1,6 +1,6 @@
 package me.doupay.sdk.bean;
 
-public class PaymentResultResponse {
+public class PaymentCallBackResponse {
 
     /**
      * 支付订单号
@@ -32,7 +32,7 @@ public class PaymentResultResponse {
      */
     private boolean result;
 
-    public PaymentResultResponse(String orderCode, String coinName, String address, String amountPaid, String protocolName, Integer paymentStatus, boolean result) {
+    public PaymentCallBackResponse(String orderCode, String coinName, String address, String amountPaid, String protocolName, Integer paymentStatus, boolean result) {
         this.orderCode = orderCode;
         this.coinName = coinName;
         this.address = address;
