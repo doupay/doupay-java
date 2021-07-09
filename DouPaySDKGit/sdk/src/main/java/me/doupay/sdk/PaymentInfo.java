@@ -90,12 +90,6 @@ public class PaymentInfo {
             return;
         }
 
-        if (orderCode.length() > 50 || orderCode.length() < 20) {
-            listener.onError(9999,"orderCode长度20到50");
-            return;
-        }
-
-
         Map<String,Object> map = new HashMap<>();
         map.put("orderCode",orderCode);
         ServerApi.SERVICE_API.getOrderInfo(Constants.basrUrl + "trade/getOrderInfo",map).subscribe(new BaseVoObserver<OrderInfoResponseData>(){
@@ -134,15 +128,6 @@ public class PaymentInfo {
 
         if (orderCode == null || coinCode == null || orderCode.isEmpty() || coinCode.isEmpty()) {
             listener.onError(9999,"缺少必要参数");
-            return;
-        }
-
-        if (coinCode.length() != 4) {
-            listener.onError(9999,"coinCode长度为4");
-            return;
-        }
-        if (orderCode.length() < 10 || orderCode.length() > 30) {
-            listener.onError(9999,"orderCode长度为10到30");
             return;
         }
 
@@ -219,16 +204,6 @@ public class PaymentInfo {
                 listener.onError(9999,"coinCode参数不能为空");
                 return;
             }
-        }
-
-        if (subject.length() < 5 || subject.length() > 10) {
-            listener.onError(9999,"subject长度为5-10");
-            return;
-        }
-
-        if (orderNo.length() < 10 || orderNo.length() > 30) {
-            listener.onError(9999,"orderNo长度为10-30");
-            return;
         }
 
         Map<String,Object> map = new HashMap<>();
@@ -319,20 +294,6 @@ public class PaymentInfo {
             listener.onError(9999,"缺少必要的参数");
             return;
         }
-
-        if (address.length() < 5 || address.length() > 50) {
-            listener.onError(9999,"退款地址【长度5到50】");
-            return;
-        }
-        if (orderCode.length() < 5 || orderCode.length() > 50) {
-            listener.onError(9999,"订单编号【长度5到50】");
-            return;
-        }
-        if (remark.length() < 5 || remark.length() > 50) {
-            listener.onError(9999,"退款描述【长度5到50】");
-            return;
-        }
-
 
         Map<String,Object> map = new HashMap<>();
         map.put("remark",remark);

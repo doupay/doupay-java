@@ -185,7 +185,7 @@ public class SDKtest {
     public void withdraw() {
         initAllParameters();
         String orderNo = String.valueOf(System.currentTimeMillis());
-        PaymentInfo.withdraw("TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "0.02", "0004", orderNo, orderNo, new CallBackListener<WithdrawResponse>() {
+        PaymentInfo.withdraw("TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "50", "0003", orderNo, orderNo, new CallBackListener<WithdrawResponse>() {
             @Override
             public void onFinish(WithdrawResponse data) {
                 System.out.println("++++++++++++++++" + data.toString());
