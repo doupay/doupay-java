@@ -30,4 +30,8 @@ public class BaseVo<D> {
         this.data = data;
     }
 
+    public BaseVo(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
 }

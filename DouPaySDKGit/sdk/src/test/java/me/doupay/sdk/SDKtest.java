@@ -1,7 +1,9 @@
 package me.doupay.sdk;
 
+import com.sun.xml.internal.rngom.parse.host.Base;
 import me.doupay.sdk.bean.*;
 import me.doupay.sdk.interfaceCallback.CallBackListener;
+import me.doupay.sdk.net.BaseVo;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -13,36 +15,35 @@ public class SDKtest {
 
     public  static  void  initAllParameters() {
         String timeStamp = "1610697341483";
-        String appId = "doupay_JEPwPEB2MD";
-        String secret = "000d5f84f5a49bc3305fc18bb265afc5";
-        String privateKey="MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCPxHn5ySq3Mq8o\n" +
-                "MU0QO7Zw7LIzhRdvxdUiuCInlvXntuNbi5XL7WKD8fA2kp1b07BnLMgej+6DuF0V\n" +
-                "OMHkDDf3zb+uHqRsf8zpX5VwqxQMTYu0K3P69FJ6aSdJNLxF4JvslwRbZW7Ncv9l\n" +
-                "1Z1XaDrZfClqQaDUZnsp21XAjlvqKHYnKngvyIlDQcpV4vDOp7TkNTQjUwchIiTm\n" +
-                "d4cao4YYYqwhAsTJYcYkPWLgqPjaVkPlWwnYeLB3p6IokMQz44KFnkhdoYCj3wB3\n" +
-                "vmeX6AIJad0+6LrABYOA1d9BZimv5AXzSKmT8tnfSQsoA0a3gIKI+npqL9ErejfB\n" +
-                "GVUezbW1AgMBAAECggEALkconGdNALun9mAoVlliWOdYVY06BhjAivSKygOmFHii\n" +
-                "pw0/ou0/EQoIMQjw7mYuGognwu7B8FSgYfxrLWVhfrsUQJBMjUB2TYkfKa1oPq2X\n" +
-                "kt+J7fZHtm+y3bXEBRpQFtBl7qWwDSI/ZCBnDYPXrbpx+mo1wylZ7BdWey1YGP9+\n" +
-                "m/dFrqiFZwwXef7GyBMDPr37c0gjXblqkwVz3rNR6qCc3MQi+zXwyhbJAuSAVBab\n" +
-                "RcODWZqD1S0ZLw5L0BOWvGJnB2+BAdWQ+BaAJmtRLBTcEvRbvdL1VBX/L+vyAVRe\n" +
-                "c8J6Cjt1KyAEDa/18bL3ih5SLgHdwT7YIiEJdv0P4QKBgQDwe6kTlGiD70kAEmgo\n" +
-                "VvOMpqivP1SDhrbQScbzzFGLfiMA4HbhyuZoDw8304/otSW5CkEkaJ19L2DglNno\n" +
-                "Rv9q8C7xY3g0BjuOeQNx5P484k6L6GyRRYRhWS8POVEMXGqnyLNgfPZs8NDohaKm\n" +
-                "G/IFT24WjwufVipDFnjyPqAdKwKBgQCZC0CGBw8BvcVbCHnmYdbGQ/D4ZoX1BMLL\n" +
-                "xcEXrDTY8NA6L4uZOJ8kOQIOZGcsY25LBXFaEKWL0rOBdCtq2M18pPQzbHE67lRK\n" +
-                "gw6K8r/vAGVKcokvwyLUmXxyLjJoylHb4iZyY4P03Fl3zSQaOpAHBEcF1H2oItLN\n" +
-                "iA1EMrbInwKBgQDc4ni2R0aIiK0gp8eL5fHmat3duenCtWYNgvZ+0FjGK6GzGHmZ\n" +
-                "g2iGg+6SdHxmXpy7jbOv4XdmmLH/Fjngo/XPH7W+eoLaJi9l+bk0UAVFnwhOcbnm\n" +
-                "5Vdmoygab6cGF4zPeAVqxt0By1/Xc4el011Fi2OuzMz8GYTQAkAtIWCn6QKBgGPI\n" +
-                "zFcWvxgZjVXfXutxG0HGBpVO80RfyEpoM4+lvgc8a+ekHFbYbhqF+Os9V2+/nKfZ\n" +
-                "cqCQff9+b3+WKMDPfpsoSfhFWkZcIiU68f5ya+X+0gwKRZwYlNsc/+DKch+U2m6N\n" +
-                "Mxgd/mlmSgcsf7+CM2n/xfbtJsi7e8p6THwMvNRtAoGBANPQjWcXbVeSUpVONYOu\n" +
-                "j1vTFIDx2yamETbA556r2hipkFfLdAYGiVkPlgCPOwOuQgM+fy+ymSXMR98JreWe\n" +
-                "WjoRUd3nh9VueSNXUty2qvlF1QEdcYfFJW/Q5agbwgZaoMTbefbroZou0MNjaVW8\n" +
-                "cFg70chkOBG0fvyiKS/6A81w";
-        String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA8EDijmSxmDT2rvH8+HYo5uLbSmiNvUfPE2/LFYt9Tt183uEDa6bnlCDGQIa1srhhVJACXiUXSL4/QmcE+vF6odzloVjG9kT/jZpa9wv6MEvyDJXzIBCxVRNJ9MrcTbM3alsf3dCIqUIgNziZTYCheiF7uPB3nRPmLTLFp12WCEtM4kqKBBMq1jX3hfEqFwg5iVryHDRdxQJNI6KzIYT0haL5RANhBon7IFArajPYieaeSE+hqkwqsP6G+qTSng6SfLdCw324up/KP9dFB/7kQchiYvcMvUeD8IL2J7NemhM6vQ5Rx+g/Y9bPDvnZ0kWSZBBAdHyJf7kIwboapE05NQIDAQAB";
-
+        String appId = "doupay_o76brkqV3P";
+        String secret = "0b58f06939be1aaa165e5a2c7a61c85f";
+        String privateKey="MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCNaXhuqmytUtjb\n" +
+                "dP5XoyZIWXXV5LsUsl9xPbR7Ckax3XqH2L85MGZiFw0ae2TJeQ3YiAmHIi05Qhvj\n" +
+                "BConl4gD8tu5IfjDh2IrEEZWd1sSzPkc9KIgT+4K+HnsCeANQyQOg09Q6kW3d8B4\n" +
+                "LDG0qRE6RIQF6TFoA7VdERIT/0hDhdQVn3ks0FdZwhwWpbwxM7Mq0/YskZJc2Wi3\n" +
+                "Ujdy7mtkOB0UtvW0JN0NcNQLdoD73+1kF7HTS6nxrJdRk5mp1GAL/RfEJbpNqf2u\n" +
+                "NgKDInzBKGw8IbURlYS+BMWCq4+dXbr1+GhKs6hdWdiy+MooUV8M+6MrjkAcaU7/\n" +
+                "EiC+y3WTAgMBAAECggEAXsUtafUbKjlYjhLlFbSIRnp15ygIXMGCBzFUUBU99Zu5\n" +
+                "r2sKFHikVN6f8Hx7ui4/ojrhL8guyK3OZKD441nBVOwgZv0ma1vC5ZtdmDsbNQlb\n" +
+                "dhVYxhDrNjz58L9ZgWnas0M7F745hNBjk+YCVdHscsFSPWffrZa2qC11kSNHub/p\n" +
+                "N+BPDbXN0Hhp+Zru42EqeAbSdGLmlAu4tNx9LyVBUIB/n2LZAMN2s6ywmeEDbwQq\n" +
+                "WP/7D87LYWQU/3VtYqRxxJZP/whxcFq1MJrKc4HSd1DQ4yZBKJ8cdiesg2c9cnCR\n" +
+                "gTnEaobjgEOGmkBw38dkeZXNucflefgNAwtllcYugQKBgQDT14icxHPim23oPqvj\n" +
+                "SeotQ/n6pGrEqw7r1bffPdmW4Ue0jTKDU2hMxvW5b8i7Uf3VhXDoGhUFELImHILU\n" +
+                "Dmxip1htw/XsgD/Gz6zWXjzQcDFsjf95TCZb7JIFJNGgqUkB58JH7roAeuCBPus+\n" +
+                "5i2jjS7dy5ZIxM0ccLAJPuZhQQKBgQCq45oxRE5UhWevYbgV6nmjsNvqM7o1zlx6\n" +
+                "uKTUfOY+sX/ZwGJ+HnlK3fKYbYSmMc8/Qj5iiMu0bDjS7tzhX9OneQ3+9/6zXWYs\n" +
+                "AjmJChP1Y6NfvIwReTSiLkHK8HduHnAI50HKpzQrX0nZv4oZ9zX1BbMj/+K1JaZV\n" +
+                "Z7Us7LkN0wKBgBQ7SmXGcVbcB0Qd8CaV4ZKPImmomDXOLG+jipr8ejJps4Jv1bor\n" +
+                "FhP3EHK0VVRmgTqKMv1HuGgybwEqyefctMc7OjvJckwy92RSYyxZ9a7meCHo8dQw\n" +
+                "zJ0M2+k32flhEYLoEmryRrtTAOv3CVqJeyRakHZIQkMS4I/txzIq2q/BAoGAAdaa\n" +
+                "9Qa4FP6uY9uYQFwaXOFtLDLMQQHsSsGrvEFvtKLyLiR8qsCnK2AB2RPshmEoypRq\n" +
+                "2WKBVnqHjfVV2PLP8xBBT0nZqpJJpBWOCuRZ3Jzqx//ePd3g7BG1UXqOvleDewUJ\n" +
+                "1yU/UWwf/kCqOqdHJFCgYbXB+ZLjHC4Wa9pMD1MCgYA9sgdnQ60ipPYcqDiVZuw1\n" +
+                "kDC+zq7l0Z4mfoPNJ8UKA9y2pJ/8BHLSxKXCtXmLvkBHOVmRmwidhBkVJnYZTPhZ\n" +
+                "OFhiCGStVHZbl4oBSB3djCGaV6qNzK2ZTc/6iyJvf1Mm1wLIL/sPx7Syuliol8Mx\n" +
+                "xz2b3uLpFk3p8R/krzdNJQ==";
+        String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2BXDlBjD/ySSWxg3Av/fwpyVGbwTG44aEWzQLvvjNxKTNmTtdlSd1Y0d0+4zY8t4H3ND4au969FEkeuqIJBdUroOHvfS4QNlr1TMIfCezB12j2i1lAHx7UEyusfoA8NkIYpv2BB57jW9mi10hiakAgD672shxdgSdT8VKoKz4rsTHHJVoDdPcrJXUOIFky8gb6KR+qP1jMDMHxlCb/HVGT4JUbwXcSsYr6zXitXzO5eyEzAYhiK3j3RG9HxYT/AcleLo/Grl+ZrJ0Swzas1DvKnqUjYHCvLrjtmrWuQ2RX3DZWE3CQQVifL4ZB+KHAi8ceRz3mbfdmT7Yx3bBUWBUQIDAQAB";
         Constants.openSysLog = true;
         Constants.getInstance().init(secret,privateKey,publicKey,appId,"200");
     }
@@ -50,152 +51,111 @@ public class SDKtest {
     @Test
     public void getCoinList () {
         initAllParameters();
-        PaymentInfo.getCoinList(new CallBackListener<CoinResponseData>() {
-            @Override
-            public void onFinish(CoinResponseData data) {
-                System.out.println("-------------------------" + data.toString());
 
-            }
+        BaseVo<CoinResponseData> baseVo = PaymentInfo.getCoinList();
+        if (baseVo.getCode() == 200) {
+            System.out.println("-------------------------" + baseVo.getData().toString());
+        }else {
+            System.out.println(baseVo.getCode() + "-------------------------" + baseVo.getMsg());
+        }
 
-            @Override
-            public void onError(int errorCode, String msg) {
-                System.out.println(errorCode + "-------------------------" + msg);
 
-            }
-        });
     }
     @Test
     public void getCurrencyList() {
         initAllParameters();
-        PaymentInfo.getCurrencyList(new CallBackListener<CurrencyResponseData>() {
-            @Override
-            public void onFinish(CurrencyResponseData data) {
-                System.out.println("-------------------------" + data.toString());
-            }
 
-            @Override
-            public void onError(int errorCode, String msg) {
-                System.out.println(errorCode + "-------------------------" + msg);
-            }
-        });
+        BaseVo<CurrencyResponseData> baseVo = PaymentInfo.getCurrencyList();
+        if (baseVo.getCode() == 200) {
+            System.out.println("-------------------------" + baseVo.getData().toString());
+        }else {
+            System.out.println(baseVo.getCode() + "-------------------------" + baseVo.getMsg());
+        }
     }
 
 
     @Test
     public void getPay() {
                  initAllParameters();
-                String orderNo = String.valueOf(System.currentTimeMillis());
-                PaymentInfo.pay("5", CoinCodeEnum.USDT, CurrencyCodeEnum.CNY, "17701278888", orderNo,
-                "我很好啊啊", "", "", OrderTypeCodeEnum.CountBuy, new CallBackListener<PayResponseData>() {
-                    @Override
-                    public void onFinish(PayResponseData data) {
-                        System.out.println("++++++++++++++++" + data.toString());
-                    }
+                String orderNo = "SJDD" + String.valueOf(System.currentTimeMillis());
 
-                    @Override
-                    public void onError(int errorCode, String msg) {
-                        System.out.println(errorCode + "-------------------------" + msg);
-                    }
-                });
+        BaseVo<PayResponseData> baseVo = PaymentInfo.pay("1", CoinCodeEnum.USDT, CurrencyCodeEnum.CNY, "17701278888", orderNo,
+                "我很好啊啊", "", "", OrderTypeCodeEnum.CountBuy);
+        if (baseVo.getCode() == 200) {
+            System.out.println("-------------------------" + baseVo.getData().toString());
+        }else {
+            System.out.println(baseVo.getCode() + "-------------------------" + baseVo.getMsg());
+        }
     }
 
     @Test
     public void cancle() {
         initAllParameters();
-        PaymentInfo.cancleOrder("ZF202107031430314990720038", new CallBackListener<PayResponseData>() {
-            @Override
-            public void onFinish(PayResponseData data) {
-                System.out.println("++++++++++++++++" + data.toString());
-            }
 
-            @Override
-            public void onError(int errorCode, String msg) {
-                System.out.println(errorCode + "-------------------------" + msg);
-            }
-        });
+        BaseVo<PayResponseData> baseVo =  PaymentInfo.cancleOrder("ZF202107121428241334279126");
+        if (baseVo.getCode() == 200) {
+            System.out.println("-------------------------" + baseVo.getData().toString());
+        }else {
+            System.out.println(baseVo.getCode() + "-------------------------" + baseVo.getMsg());
+        }
     }
 
     @Test
     public void getOrderInfo() {
         initAllParameters();
-        PaymentInfo.getOrderInfo("ZF202107061802551623157444", new CallBackListener<OrderInfoResponseData>() {
-            @Override
-            public void onFinish(OrderInfoResponseData data) {
-                System.out.println("++++++++++++++++" + data.toString());
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                System.out.println(errorCode + "-------------------------" + msg);
-            }
-        });
+        BaseVo<OrderInfoResponseData> baseVo = PaymentInfo.getOrderInfo("ZF202107121428241334279126");
+        if (baseVo.getCode() == 200) {
+            System.out.println("-------------------------" + baseVo.getData().toString());
+        }else {
+            System.out.println(baseVo.getCode() + "-------------------------" + baseVo.getMsg());
+        }
     }
 
     @Test
     public void getPaymentInfo() {
         initAllParameters();
 
-        PaymentInfo.getPaymentInfo("0001","" ,"ZF202107031353384554486189", new CallBackListener<PaymentInfoResponseData>() {
-            @Override
-            public void onFinish(PaymentInfoResponseData data) {
-                System.out.println("++++++++++++++++" + data.toString());
-
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                System.out.println(errorCode + "-------------------------" + msg);
-            }
-        });
+        BaseVo<PaymentInfoResponseData> baseVo =  PaymentInfo.getPaymentInfo("0001","" ,"ZF202107031353384554486189");
+        if (baseVo.getCode() == 200) {
+            System.out.println("-------------------------" + baseVo.getData().toString());
+        }else {
+            System.out.println(baseVo.getCode() + "-------------------------" + baseVo.getMsg());
+        }
     }
 
     @Test
     public void getRefund() {
         initAllParameters();
-        PaymentInfo.refund("TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "0.5", "ZF202107051115409252689736", "退0.5个,啦啦啦", new CallBackListener<RefundResponseData>() {
-            @Override
-            public void onFinish(RefundResponseData data) {
-                System.out.println("++++++++++++++++" + data.toString());
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                System.out.println(errorCode + "-------------------------" + msg);
-            }
-        });
+        BaseVo<RefundResponseData> baseVo = PaymentInfo.refund("TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "5", "ZF202107121428241334279126", "退0.5个,啦啦啦");
+        if (baseVo.getCode() == 200) {
+            System.out.println("-------------------------" + baseVo.getData().toString());
+        }else {
+            System.out.println(baseVo.getCode() + "-------------------------" + baseVo.getMsg());
+        }
     }
 
     @Test
     public void getRefundInfo() {
         initAllParameters();
-        PaymentInfo.getRefunds("ZF202107051115409252689736", new CallBackListener<RefundInfoResponseData>() {
-            @Override
-            public void onFinish(RefundInfoResponseData data) {
-                System.out.println("++++++++++++++++" + data.toString());
-            }
 
-            @Override
-            public void onError(int errorCode, String msg) {
-                System.out.println(errorCode + "-------------------------" + msg);
-            }
-        });
+        BaseVo<RefundInfoResponseData> baseVo = PaymentInfo.getRefunds("ZF202107121428241334279126");
+        if (baseVo.getCode() == 200) {
+            System.out.println("-------------------------" + baseVo.getData().toString());
+        }else {
+            System.out.println(baseVo.getCode() + "-------------------------" + baseVo.getMsg());
+        }
     }
 
     @Test
     public void withdraw() {
         initAllParameters();
-        String orderNo = String.valueOf(System.currentTimeMillis());
-        PaymentInfo.withdraw("TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "50", "0003", orderNo, orderNo, new CallBackListener<WithdrawResponse>() {
-            @Override
-            public void onFinish(WithdrawResponse data) {
-                System.out.println("++++++++++++++++" + data.toString());
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                System.out.println(errorCode + "-------------------------" + msg);
-            }
-        });
+        String orderNo = "SHYH" + String.valueOf(System.currentTimeMillis());
+        BaseVo<WithdrawResponse> baseVo = PaymentInfo.withdraw("TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "0.07", "0004", orderNo, orderNo);
+        if (baseVo.getCode() == 200) {
+            System.out.println("-------------------------" + baseVo.getData().toString());
+        }else {
+            System.out.println(baseVo.getCode() + "-------------------------" + baseVo.getMsg());
+        }
     }
 
 

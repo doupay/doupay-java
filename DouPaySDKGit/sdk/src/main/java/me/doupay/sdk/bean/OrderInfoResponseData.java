@@ -284,6 +284,16 @@ public class OrderInfoResponseData {
             return coinName;
         }
 
+        @Override
+        public String toString() {
+            return "PaymentInfoBean{" +
+                    "coinCode='" + coinCode + '\'' +
+                    ", coinName='" + coinName + '\'' +
+                    ", isDefault=" + isDefault +
+                    ", chainInfos=" + chainInfos +
+                    '}';
+        }
+
         public void setCoinName(String coinName) {
             this.coinName = coinName;
         }
@@ -363,6 +373,20 @@ public class OrderInfoResponseData {
 
             public void setPrice(String price) {
                 this.price = price;
+            }
+
+            @Override
+            public String toString() {
+                return "ChainInfosBean{" +
+                        "address='" + address + '\'' +
+                        ", amount='" + amount + '\'' +
+                        ", chainCoinCode='" + chainCoinCode + '\'' +
+                        ", chainCoinName='" + chainCoinName + '\'' +
+                        ", price='" + price + '\'' +
+                        ", isDefault=" + isDefault +
+                        ", paymentStatus=" + paymentStatus +
+                        ", protocolName='" + protocolName + '\'' +
+                        '}';
             }
 
             public int getIsDefault() {

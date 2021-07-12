@@ -38,6 +38,14 @@ public class CoinResponseData {
         public void setCoinCode(String coinCode) {
             this.coinCode = coinCode;
         }
+
+        @Override
+        public String toString() {
+            return "RecordsBean{" +
+                    "coinName='" + coinName + '\'' +
+                    ", coinCode='" + coinCode + '\'' +
+                    '}';
+        }
     }
 
     @Override

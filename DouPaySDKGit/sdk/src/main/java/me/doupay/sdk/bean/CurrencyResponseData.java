@@ -48,6 +48,15 @@ public class CurrencyResponseData {
         public void setCurrency(String currency) {
             this.currency = currency;
         }
+
+        @Override
+        public String toString() {
+            return "RecordsBean{" +
+                    "isDefault=" + isDefault +
+                    ", name='" + name + '\'' +
+                    ", currency='" + currency + '\'' +
+                    '}';
+        }
     }
 
     @Override

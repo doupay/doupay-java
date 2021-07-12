@@ -1,8 +1,8 @@
 package me.doupay.sdk.bean;
 
 public enum OrderTypeCodeEnum {
-    MoneyBuy("0001","金额买"),
-    CountBuy("0002","数量买");
+    MoneyBuy("0001","BY_MONEY"),
+    CountBuy("0002","BY_AMOUNT");
     private String key;
     private String value;
 

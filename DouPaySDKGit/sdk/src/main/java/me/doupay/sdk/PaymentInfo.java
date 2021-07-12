@@ -1,11 +1,14 @@
 package me.doupay.sdk;
 
+import io.reactivex.Observable;
 import me.doupay.sdk.bean.*;
 import me.doupay.sdk.interfaceCallback.CallBackListener;
+import me.doupay.sdk.net.BaseVo;
 import me.doupay.sdk.net.BaseVoObserver;
 import me.doupay.sdk.net.ServerApi;
 import me.doupay.sdk.sign.RSAUtils;
 import org.json.JSONObject;
+import retrofit2.Call;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -16,98 +19,64 @@ import java.util.TreeMap;
 public class PaymentInfo {
     /**
      * 获取币种列表
-     * @param listener 回调
      */
-    public static void  getCoinList (CallBackListener<CoinResponseData> listener) {
+    public static BaseVo<CoinResponseData>  getCoinList () {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            listener.onError(9999,"请先调用Constants.getInstance().init()");
-            return;
+            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
         }
         Map<String,Object> map = new HashMap<>();
         map.put("test","test");
-        ServerApi.SERVICE_API.getCoinList(Constants.basrUrl + "trade/getCoinList",map).subscribe(new BaseVoObserver<CoinResponseData>(){
-            @Override
-            public void onPlaintextSuccess(CoinResponseData data) {
-                if (listener != null) {
-                    listener.onFinish(data);
-                }
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                if (listener != null) {
-                    listener.onError(errorCode,msg);
-                }
-
-            }
-        });
+        Call<BaseVo<CoinResponseData>> coinList = ServerApi.SERVICE_API.getCoinList(Constants.basrUrl + "trade/getCoinList", map);
+        try {
+            BaseVo<CoinResponseData> body = coinList.execute().body();
+            return body;
+        }catch (Exception e) {
+            return new BaseVo<>(9999,e.getMessage());
+        }
     }
 
     /**
      * 获取法币列表
-     * @param listener 回调
      */
-    public static void getCurrencyList(CallBackListener<CurrencyResponseData> listener) {
+    public static BaseVo<CurrencyResponseData> getCurrencyList() {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            listener.onError(9999,"请先调用Constants.getInstance().init()");
-            return;
+            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+
         }
         Map<String,Object> map = new HashMap<>();
         map.put("test","test");
-        ServerApi.SERVICE_API.getCurrencyList(Constants.basrUrl + "trade/getCurrencyList",map).subscribe(new BaseVoObserver<CurrencyResponseData>(){
-            @Override
-            public void onPlaintextSuccess(CurrencyResponseData data) {
-                if (listener != null) {
-                    listener.onFinish(data);
-                }
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                if (listener != null) {
-                    listener.onError(errorCode,msg);
-                }
-
-            }
-        });
-
+      Call<BaseVo<CurrencyResponseData>> currentList =  ServerApi.SERVICE_API.getCurrencyList(Constants.basrUrl + "trade/getCurrencyList",map);
+        try {
+            BaseVo<CurrencyResponseData> body = currentList.execute().body();
+            return body;
+        }catch (Exception e) {
+            return new BaseVo<>(9999,e.getMessage());
+        }
     }
 
     /**
      * 获取订单信息
      * @param orderCode 订单号【长度20到50】
-     * @param listener 回调
      */
-    public  static  void getOrderInfo(String orderCode, CallBackListener<OrderInfoResponseData> listener) {
+    public  static   BaseVo<OrderInfoResponseData> getOrderInfo(String orderCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            listener.onError(9999,"请先调用Constants.getInstance().init()");
-            return;
+            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
         }
 
 
         if (orderCode == null || orderCode.isEmpty()) {
-            listener.onError(9999,"缺少必要参数");
-            return;
+            return new BaseVo<>(9999,"缺少必要参数");
         }
 
         Map<String,Object> map = new HashMap<>();
         map.put("orderCode",orderCode);
-        ServerApi.SERVICE_API.getOrderInfo(Constants.basrUrl + "trade/getOrderInfo",map).subscribe(new BaseVoObserver<OrderInfoResponseData>(){
-            @Override
-            public void onPlaintextSuccess(OrderInfoResponseData data) {
-                if (listener != null) {
-                    listener.onFinish(data);
-                }
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                if (listener != null) {
-                    listener.onError(errorCode,msg);
-                }
-
-            }
-        });
+        Call<BaseVo<OrderInfoResponseData>> orderInfo = ServerApi.SERVICE_API.getOrderInfo(Constants.basrUrl + "trade/getOrderInfo",map);
+        try {
+            BaseVo<OrderInfoResponseData> body = orderInfo.execute().body();
+            return body;
+        }catch (Exception e) {
+            return new BaseVo<>(9999,e.getMessage());
+        }
     }
 /*
 
@@ -118,17 +87,14 @@ public class PaymentInfo {
      * @param coinCode  币种代码【长度4】
      * @param chainCoinCode 链币种代码【长度4】,非必传
      * @param orderCode 订单号【长度10到30】
-     * @param listener 回调
      */
-    public static  void getPaymentInfo (String coinCode,String chainCoinCode, String orderCode, CallBackListener<PaymentInfoResponseData> listener) {
+    public static  BaseVo<PaymentInfoResponseData> getPaymentInfo (String coinCode,String chainCoinCode, String orderCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            listener.onError(9999,"请先调用Constants.getInstance().init()");
-            return;
+            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
         }
 
         if (orderCode == null || coinCode == null || orderCode.isEmpty() || coinCode.isEmpty()) {
-            listener.onError(9999,"缺少必要参数");
-            return;
+            return new BaseVo<>(9999,"缺少必要参数");
         }
 
         Map<String,Object> map = new HashMap<>();
@@ -137,72 +103,58 @@ public class PaymentInfo {
         if (chainCoinCode != null && !chainCoinCode.isEmpty()) {
             map.put("chainCoinCode",chainCoinCode);
         }
-        ServerApi.SERVICE_API.getPaymentInfo(Constants.basrUrl + "trade/getPaymentInfo",map).subscribe(new BaseVoObserver<PaymentInfoResponseData>(){
-            @Override
-            public void onPlaintextSuccess(PaymentInfoResponseData data) {
-                if (listener != null) {
-                    listener.onFinish(data);
-                }
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                if (listener != null) {
-                    listener.onError(errorCode,msg);
-                }
-            }
-        });
+        Call<BaseVo<PaymentInfoResponseData>> paymentInfo = ServerApi.SERVICE_API.getPaymentInfo(Constants.basrUrl + "trade/getPaymentInfo",map);
+        try {
+            BaseVo<PaymentInfoResponseData> body = paymentInfo.execute().body();
+            return body;
+        }catch (Exception e) {
+            return new BaseVo<>(9999,e.getMessage());
+        }
     }
 
     /**
      * 付款,当orderType为0001时,amount内容为金额,currencyCode为必传,当orderType为0002时amount内容为数量,coinCode为必传
      * @param amount        金额(0001)
-     * @param coinCode      币种(0002)【长度4】
+     * @param coinName      币种(BTC)
      * @param currencyCode  法币(0001:人民币cny,美元usa)【长度3到4】
      * @param merchantUser  商家用户【长度10到20之间】
      * @param orderNo       订单号【长度10到30】
      * @param subject       商品标题【长度5~10】
      * @param body          商品描述信息【长度10到100】
      * @param description   附加说明【长度10到50】
-     * @param orderType     订单类型(0001金额 0002数量)【长度4】
-     * @param listener      回调
+     * @param orderType     订单类型(BY_AMOUNT、BY_MONEY)
      */
-    public  static void  pay (
-            String amount, CoinCodeEnum coinCode,CurrencyCodeEnum currencyCode,
+    public  static  BaseVo<PayResponseData>  pay (
+            String amount, CoinCodeEnum coinName,CurrencyCodeEnum currencyCode,
             String merchantUser,String orderNo,String subject,
             String body, String description,
-            OrderTypeCodeEnum orderType, CallBackListener<PayResponseData> listener
-                              ) {
+            OrderTypeCodeEnum orderType ) {
         if (!Constants.getInstance().isInitAllParameters()) {
-            listener.onError(9999,"请先调用Constants.getInstance().init()方法");
-            return;
+            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
         }
         if ( amount == null  || orderNo == null || orderType == null
                 || subject == null|| amount.isEmpty()
                 ||  orderNo.isEmpty()  || subject.isEmpty()
             ) {
-            listener.onError(9999,"缺少必要的参数");
-            return;
+            return new BaseVo<>(9999,"缺少必要的参数");
         }
 
-        if (!orderType.getKey().equals(OrderTypeCodeEnum.MoneyBuy.getKey())
-                && !orderType.getKey().equals(OrderTypeCodeEnum.CountBuy.getKey())) {
-            listener.onError(9999,"orderType订单类型【0001金额 0002数量】");
-            return;
+        if (!orderType.getValue().equals(OrderTypeCodeEnum.MoneyBuy.getValue())
+                && !orderType.getValue().equals(OrderTypeCodeEnum.CountBuy.getValue())) {
+            return new BaseVo<>(9999,"orderType订单类型【BY_AMOUNT、BY_MONEY】");
         }
 
-        if (orderType.getKey().equals(OrderTypeCodeEnum.MoneyBuy.getKey())) {
+        if (orderType.getValue().equals(OrderTypeCodeEnum.MoneyBuy.getValue())) {
             if (currencyCode == null) {
-                listener.onError(9999,"currencyCode不能为空");
-                return;
+                return new BaseVo<>(9999,"currencyCode不能为空");
+
             }
 
         }
 
-        if (orderType.getKey().equals(OrderTypeCodeEnum.CountBuy.getKey())) {
-            if (coinCode == null) {
-                listener.onError(9999,"coinCode参数不能为空");
-                return;
+        if (orderType.getValue().equals(OrderTypeCodeEnum.CountBuy.getValue())) {
+            if (coinName == null) {
+                return new BaseVo<>(9999,"coinName参数不能为空");
             }
         }
 
@@ -211,7 +163,7 @@ public class PaymentInfo {
         map.put("expireTime",Constants.getExpireTime());
         map.put("merchantUser",merchantUser);
         map.put("orderNo",orderNo);
-        map.put("orderType",orderType.getKey());
+        map.put("orderType",orderType.getValue());
         map.put("subject",subject);
         if (body != null && !body.equals("")) {
             map.put("body",body);
@@ -219,62 +171,45 @@ public class PaymentInfo {
         if (description != null && !description.equals("")) {
             map.put("description",description);
         }
-        if (orderType .getKey().equals(OrderTypeCodeEnum.MoneyBuy.getKey())) {
+        if (orderType .getValue().equals(OrderTypeCodeEnum.MoneyBuy.getValue())) {
             map.put("money",amount);
             map.put("currency",currencyCode.getKey());
         }
-        if (orderType.getKey().equals(OrderTypeCodeEnum.CountBuy.getKey())) {
+        if (orderType.getValue().equals(OrderTypeCodeEnum.CountBuy.getValue())) {
             map.put("amount",amount);
-            map.put("coinCode",coinCode.getKey());
+            map.put("coinName",coinName.getValue());
         }
-        ServerApi.SERVICE_API.gotoPay(Constants.basrUrl + "trade/pay",map).subscribe(new BaseVoObserver<PayResponseData>(){
-            @Override
-            public void onPlaintextSuccess(PayResponseData data) {
-                if (listener != null) {
-                    listener.onFinish(data);
-                }
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                if (listener != null) {
-                    listener.onError(errorCode,msg);
-                }
-            }
-        });
+        Call<BaseVo<PayResponseData>> gotoPay =  ServerApi.SERVICE_API.gotoPay(Constants.basrUrl + "trade/pay",map);
+        try {
+            BaseVo<PayResponseData> responseBody = gotoPay.execute().body();
+            return responseBody;
+        }catch (Exception e) {
+            return new BaseVo<>(9999,e.getMessage());
+        }
     }
 
     /**
      * 取消订单
      * @param orderCode 订单号
      */
-    public static void cancleOrder (String orderCode,CallBackListener<PayResponseData> listener) {
+    public static BaseVo<PayResponseData> cancleOrder (String orderCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            listener.onError(9999,"请先调用Constants.getInstance().init()");
-            return;
+            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+
         }
         if (orderCode == null || orderCode.equals("")) {
-            listener.onError(9999,"缺少必要的参数");
-            return;
+            return new BaseVo<>(9999,"缺少必要的参数");
         }
         Map<String,Object> map = new HashMap<>();
         map.put("orderCode",orderCode);
 
-        ServerApi.SERVICE_API.cancleOrder(Constants.basrUrl + "trade/cancel",map).subscribe(new BaseVoObserver<PayResponseData>(){
-            @Override
-            public void onPlaintextSuccess(PayResponseData data) {
-                if (listener != null) {
-                    listener.onFinish(data);
-                }
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                if (listener != null) {
-                    listener.onError(errorCode,msg);
-                }
-            }
-        });
+        Call<BaseVo<PayResponseData>> baseVoCall =  ServerApi.SERVICE_API.cancleOrder(Constants.basrUrl + "trade/cancel",map);
+        try {
+            BaseVo<PayResponseData> body = baseVoCall.execute().body();
+            return body;
+        }catch (Exception e) {
+            return new BaseVo<>(9999,e.getMessage());
+        }
     }
 
     /**
@@ -283,16 +218,14 @@ public class PaymentInfo {
      * @param amount        退款数量【长度1到50
      * @param orderCode     订单编号【长度5到50】
      * @param remark   退款描述【长度5到50】
-     * @param listener      回调
      */
-    public  static void refund(String address,String amount,String orderCode,String remark,CallBackListener<RefundResponseData> listener) {
+    public  static BaseVo<RefundResponseData> refund(String address,String amount,String orderCode,String remark) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            listener.onError(9999,"请先调用Constants.getInstance().init()");
-            return;
+            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+
         }
         if (address ==null || amount == null || remark == null || orderCode == null || remark.isEmpty() || orderCode.isEmpty() || amount.isEmpty() || address.isEmpty()) {
-            listener.onError(9999,"缺少必要的参数");
-            return;
+            return new BaseVo<>(9999,"缺少必要的参数");
         }
 
         Map<String,Object> map = new HashMap<>();
@@ -301,102 +234,71 @@ public class PaymentInfo {
         map.put("appId",Constants.getAppId());
         map.put("orderCode",orderCode);
         map.put("address",address);
-        ServerApi.SERVICE_API.gotoRefund(Constants.basrUrl + "trade/refund",map).subscribe(new BaseVoObserver<RefundResponseData>(){
-            @Override
-            public void onPlaintextSuccess(RefundResponseData data) {
-                if (listener != null) {
-                    listener.onFinish(data);
-                }
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                if (listener != null) {
-                    listener.onError(errorCode,msg);
-                }
-            }
-        });
+        Call<BaseVo<RefundResponseData>> baseVoCall =  ServerApi.SERVICE_API.gotoRefund(Constants.basrUrl + "trade/refund",map);
+        try {
+            BaseVo<RefundResponseData> body = baseVoCall.execute().body();
+            return body;
+        }catch (Exception e) {
+            return new BaseVo<>(9999,e.getMessage());
+        }
     }
 
     /**
      * 获取退款信息
      * @param orderCode     订单编号【长度20到50】
-     * @param listener      回调
      */
-    public  static void getRefunds(String orderCode,CallBackListener<RefundInfoResponseData> listener) {
+    public  static BaseVo<RefundInfoResponseData> getRefunds(String orderCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            listener.onError(9999,"请先调用Constants.getInstance().init()");
-            return;
+            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
         }
 
         if (orderCode == null || orderCode.isEmpty() ) {
-            listener.onError(9999,"缺少必要参数");
-            return;
+            return new BaseVo<>(9999,"缺少必要参数");
         }
 
         Map<String,Object> map = new HashMap<>();
         map.put("orderCode",orderCode);
 
-        ServerApi.SERVICE_API.getRefundInfo(Constants.basrUrl + "trade/getRefunds",map).subscribe(new BaseVoObserver<RefundInfoResponseData>(){
-            @Override
-            public void onPlaintextSuccess(RefundInfoResponseData data) {
-                if (listener != null) {
-                    listener.onFinish(data);
-                }
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                if (listener != null) {
-                    listener.onError(errorCode,msg);
-                }
-            }
-        });
+        Call<BaseVo<RefundInfoResponseData>> baseVoCall =  ServerApi.SERVICE_API.getRefundInfo(Constants.basrUrl + "trade/getRefunds",map);
+        try {
+            BaseVo<RefundInfoResponseData> body = baseVoCall.execute().body();
+            return body;
+        }catch (Exception e) {
+            return new BaseVo<>(9999,e.getMessage());
+        }
     }
 
     /**
      *提现
      * @param address              地址
      * @param amount               数量【最小0.000001】
-     * @param coinCode             币种【长度4】
+     * @param coinName             币种
      * @param merchantUser     	   商家用户【长度10到20之间】
      * @param orderNo              订单号【长度10到30】
-     * @param listener             回调
      */
-    public  static void withdraw(String address,String amount,String coinCode,String merchantUser,String orderNo,CallBackListener<WithdrawResponse> listener) {
+    public  static BaseVo<WithdrawResponse> withdraw(String address,String amount,String coinName,String merchantUser,String orderNo) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            listener.onError(9999,"请先调用Constants.getInstance().init()");
-            return;
+            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
         }
 
-        if (address == null  || amount == null  || coinCode == null || merchantUser == null || orderNo == null) {
-            listener.onError(9999,"缺少必要参数");
-            return;
+        if (address == null  || amount == null  || coinName == null || merchantUser == null || orderNo == null) {
+            return new BaseVo<>(9999,"缺少必要参数");
         }
 
         Map<String,Object> map = new HashMap<>();
         map.put("address",address);
         map.put("amount",amount);
         map.put("appId",Constants.getAppId());
-        map.put("coinCode",coinCode);
+        map.put("coinName",coinName);
         map.put("merchantUser",merchantUser);
         map.put("orderNo",orderNo);
-        ServerApi.SERVICE_API.withdraw(Constants.basrUrl + "trade/withdrawal",map).subscribe(new BaseVoObserver<WithdrawResponse>(){
-            @Override
-            public void onPlaintextSuccess(WithdrawResponse data) {
-                if (listener != null) {
-                    listener.onFinish(data);
-                }
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                if (listener != null) {
-                    listener.onError(errorCode,msg);
-                }
-            }
-        });
-
+        Call<BaseVo<WithdrawResponse>> baseVoCall =   ServerApi.SERVICE_API.withdraw(Constants.basrUrl + "trade/withdrawal",map);
+        try {
+            BaseVo<WithdrawResponse> body = baseVoCall.execute().body();
+            return body;
+        }catch (Exception e) {
+            return new BaseVo<>(9999,e.getMessage());
+        }
     }
 
     /**
@@ -405,12 +307,10 @@ public class PaymentInfo {
      * @param endTime 结束时间
      * @param pageSize 数量
      * @param pageNo 页数
-     * @param listener 回调
      */
-    public  static void getBillRecords( LocalDateTime startTime,LocalDateTime endTime,Integer pageSize,Integer pageNo, CallBackListener<BillRecord> listener) {
+    public  static BaseVo<BillRecord> getBillRecords( LocalDateTime startTime,LocalDateTime endTime,Integer pageSize,Integer pageNo) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            listener.onError(9999,"请先调用Constants.getInstance().init()");
-            return;
+            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
         }
         Map<String,Object> map = new HashMap<>();
         map.put("appId",Constants.getAppId());
@@ -422,23 +322,13 @@ public class PaymentInfo {
         if (endTime != null) {
             map.put("endTime",endTime);
         }
-
-        ServerApi.SERVICE_API.getBillRecord(Constants.basrUrl + "trade/getBill",map).subscribe(new BaseVoObserver<BillRecord>(){
-            @Override
-            public void onPlaintextSuccess(BillRecord data) {
-                if (listener != null) {
-                    listener.onFinish(data);
-                }
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-                if (listener != null) {
-                    listener.onError(errorCode,msg);
-                }
-            }
-        });
-
+        Call<BaseVo<BillRecord>> baseVoCall = ServerApi.SERVICE_API.getBillRecord(Constants.basrUrl + "trade/getBill",map);
+        try {
+            BaseVo<BillRecord> body = baseVoCall.execute().body();
+            return body;
+        }catch (Exception e) {
+            return new BaseVo<>(9999,e.getMessage());
+        }
     }
 
     /**

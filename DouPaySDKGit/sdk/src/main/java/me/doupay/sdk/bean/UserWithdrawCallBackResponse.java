@@ -17,7 +17,7 @@ public class UserWithdrawCallBackResponse {
     private String amount;
 
     /// 结果
-    private Boolean result;
+    private boolean result;
 
     public String getOrderCode() {
         return orderCode;
@@ -59,15 +59,15 @@ public class UserWithdrawCallBackResponse {
         this.amount = amount;
     }
 
-    public Boolean getResult() {
+    public boolean getResult() {
         return result;
     }
 
-    public void setResult(Boolean result) {
+    public void setResult(boolean result) {
         this.result = result;
     }
 
-    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinCode, String address, String amount, Boolean result) {
+    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinCode, String address, String amount, boolean result) {
         this.orderCode = orderCode;
         this.orderType = orderType;
         this.coinCode = coinCode;
