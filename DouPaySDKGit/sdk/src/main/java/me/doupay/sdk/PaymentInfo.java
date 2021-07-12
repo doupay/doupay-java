@@ -111,7 +111,7 @@ public class PaymentInfo {
     }
 
     /**
-     * 付款,当orderType为0001时,amount内容为金额,currencyCode为必传,当orderType为0002时amount内容为数量,coinCode为必传
+     * 付款,当orderType为0001时,amount内容为金额,currencyCode为必传,当orderType为0002时amount内容为数量,coinName为必传
      * @param amount        金额
      * @param coinName      币种(BTC)
      * @param currencyCode  法币(0001:人民币cny,美元usa)【长度3到4】
@@ -375,10 +375,11 @@ public class PaymentInfo {
             }
             String orderCode = jsonObject.getString("orderCode");
             String coinCode = jsonObject.getString("coinCode");
+            String coinName = jsonObject.getString("coinName");
             String address = jsonObject.getString("address");
             String amount = jsonObject.getString("amount");
             boolean result = jsonObject.getBoolean("result");
-            UserWithdrawCallBackResponse userWithdrawCallBackResponse = new UserWithdrawCallBackResponse(orderCode,type,coinCode,address,amount,result);
+            UserWithdrawCallBackResponse userWithdrawCallBackResponse = new UserWithdrawCallBackResponse(orderCode,type,coinCode,coinName,address,amount,result);
             withdrawCalllBack.onFinish(userWithdrawCallBackResponse);
         }
 

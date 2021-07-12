@@ -9,7 +9,8 @@ public class UserWithdrawCallBackResponse {
 
     /// 币种代码
     private String coinCode;
-
+    /// 币种代码
+    private String coinName;
     /// 地址
     private String address;
 
@@ -67,10 +68,11 @@ public class UserWithdrawCallBackResponse {
         this.result = result;
     }
 
-    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinCode, String address, String amount, boolean result) {
+    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinCode, String coinName,String address, String amount, boolean result) {
         this.orderCode = orderCode;
         this.orderType = orderType;
         this.coinCode = coinCode;
+        this.coinName = coinName;
         this.address = address;
         this.amount = amount;
         this.result = result;
