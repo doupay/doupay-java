@@ -43,7 +43,7 @@ public class SDKtest {
                 "xz2b3uLpFk3p8R/krzdNJQ==";
         String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2BXDlBjD/ySSWxg3Av/fwpyVGbwTG44aEWzQLvvjNxKTNmTtdlSd1Y0d0+4zY8t4H3ND4au969FEkeuqIJBdUroOHvfS4QNlr1TMIfCezB12j2i1lAHx7UEyusfoA8NkIYpv2BB57jW9mi10hiakAgD672shxdgSdT8VKoKz4rsTHHJVoDdPcrJXUOIFky8gb6KR+qP1jMDMHxlCb/HVGT4JUbwXcSsYr6zXitXzO5eyEzAYhiK3j3RG9HxYT/AcleLo/Grl+ZrJ0Swzas1DvKnqUjYHCvLrjtmrWuQ2RX3DZWE3CQQVifL4ZB+KHAi8ceRz3mbfdmT7Yx3bBUWBUQIDAQAB";
         Constants.openSysLog = true;
-        Constants.getInstance().init(secret,privateKey,publicKey,appId,"200");
+        Constants.getInstance().init(secret,privateKey,publicKey,appId,"86400");
     }
 
     @Test

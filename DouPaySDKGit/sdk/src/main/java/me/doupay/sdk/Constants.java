@@ -20,7 +20,7 @@ public class Constants {
      * @param secret secket
      * @param privateKey privateKey
      * @param appId appid
-     * @param expireTime 过期时间,以分钟为单位,eg:30分钟有效期,就传"30"
+     * @param expireTime 过期时间,以秒为单位,eg:30分钟有效期,就传"60*30"
      */
     public void init(String secret, String privateKey,String publicKey, String appId,String expireTime) {
         Constants.secret = secret;
