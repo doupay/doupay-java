@@ -1,10 +1,8 @@
 package me.doupay.sdk;
 
-import io.reactivex.Observable;
 import me.doupay.sdk.bean.*;
 import me.doupay.sdk.interfaceCallback.CallBackListener;
 import me.doupay.sdk.net.BaseVo;
-import me.doupay.sdk.net.BaseVoObserver;
 import me.doupay.sdk.net.ServerApi;
 import me.doupay.sdk.sign.RSAUtils;
 import org.json.JSONObject;
@@ -114,7 +112,7 @@ public class PaymentInfo {
 
     /**
      * 付款,当orderType为0001时,amount内容为金额,currencyCode为必传,当orderType为0002时amount内容为数量,coinCode为必传
-     * @param amount        金额(0001)
+     * @param amount        金额
      * @param coinName      币种(BTC)
      * @param currencyCode  法币(0001:人民币cny,美元usa)【长度3到4】
      * @param merchantUser  商家用户【长度10到20之间】
@@ -125,8 +123,8 @@ public class PaymentInfo {
      * @param orderType     订单类型(BY_AMOUNT、BY_MONEY)
      */
     public  static  BaseVo<PayResponseData>  pay (
-            String amount, CoinCodeEnum coinName,CurrencyCodeEnum currencyCode,
-            String merchantUser,String orderNo,String subject,
+            String amount, CoinNameEnum coinName, CurrencyCodeEnum currencyCode,
+            String merchantUser, String orderNo, String subject,
             String body, String description,
             OrderTypeCodeEnum orderType ) {
         if (!Constants.getInstance().isInitAllParameters()) {
@@ -139,12 +137,12 @@ public class PaymentInfo {
             return new BaseVo<>(9999,"缺少必要的参数");
         }
 
-        if (!orderType.getValue().equals(OrderTypeCodeEnum.MoneyBuy.getValue())
-                && !orderType.getValue().equals(OrderTypeCodeEnum.CountBuy.getValue())) {
+        if (orderType != OrderTypeCodeEnum.BY_AMOUNT
+                && orderType != OrderTypeCodeEnum.BY_MONEY) {
             return new BaseVo<>(9999,"orderType订单类型【BY_AMOUNT、BY_MONEY】");
         }
 
-        if (orderType.getValue().equals(OrderTypeCodeEnum.MoneyBuy.getValue())) {
+        if (orderType == OrderTypeCodeEnum.BY_MONEY) {
             if (currencyCode == null) {
                 return new BaseVo<>(9999,"currencyCode不能为空");
 
@@ -152,7 +150,7 @@ public class PaymentInfo {
 
         }
 
-        if (orderType.getValue().equals(OrderTypeCodeEnum.CountBuy.getValue())) {
+        if (orderType == OrderTypeCodeEnum.BY_AMOUNT) {
             if (coinName == null) {
                 return new BaseVo<>(9999,"coinName参数不能为空");
             }
@@ -163,7 +161,7 @@ public class PaymentInfo {
         map.put("expireTime",Constants.getExpireTime());
         map.put("merchantUser",merchantUser);
         map.put("orderNo",orderNo);
-        map.put("orderType",orderType.getValue());
+        map.put("orderType",orderType);
         map.put("subject",subject);
         if (body != null && !body.equals("")) {
             map.put("body",body);
@@ -171,13 +169,14 @@ public class PaymentInfo {
         if (description != null && !description.equals("")) {
             map.put("description",description);
         }
-        if (orderType .getValue().equals(OrderTypeCodeEnum.MoneyBuy.getValue())) {
+
+        if (orderType == OrderTypeCodeEnum.BY_MONEY) {
             map.put("money",amount);
-            map.put("currency",currencyCode.getKey());
+            map.put("currency",currencyCode);
         }
-        if (orderType.getValue().equals(OrderTypeCodeEnum.CountBuy.getValue())) {
+        if (orderType == OrderTypeCodeEnum.BY_AMOUNT) {
             map.put("amount",amount);
-            map.put("coinName",coinName.getValue());
+            map.put("coinName",coinName);
         }
         Call<BaseVo<PayResponseData>> gotoPay =  ServerApi.SERVICE_API.gotoPay(Constants.basrUrl + "trade/pay",map);
         try {

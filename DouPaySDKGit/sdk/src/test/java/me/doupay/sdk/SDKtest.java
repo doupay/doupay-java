@@ -1,12 +1,10 @@
 package me.doupay.sdk;
 
-import com.sun.xml.internal.rngom.parse.host.Base;
 import me.doupay.sdk.bean.*;
 import me.doupay.sdk.interfaceCallback.CallBackListener;
 import me.doupay.sdk.net.BaseVo;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 
@@ -79,8 +77,8 @@ public class SDKtest {
                  initAllParameters();
                 String orderNo = "SJDD" + String.valueOf(System.currentTimeMillis());
 
-        BaseVo<PayResponseData> baseVo = PaymentInfo.pay("1", CoinCodeEnum.USDT, CurrencyCodeEnum.CNY, "17701278888", orderNo,
-                "我很好啊啊", "", "", OrderTypeCodeEnum.CountBuy);
+        BaseVo<PayResponseData> baseVo = PaymentInfo.pay("1", CoinNameEnum.TRX, CurrencyCodeEnum.CNY, "17701278888", orderNo,
+                "我很好啊啊", "", "", OrderTypeCodeEnum.BY_AMOUNT);
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
@@ -194,17 +192,17 @@ public class SDKtest {
         initAllParameters();
         LocalDateTime start =  LocalDateTime.now();
         LocalDateTime end = LocalDateTime.now();
-        PaymentInfo.getBillRecords( null, null, 10, 1, new CallBackListener<BillRecord>() {
-            @Override
-            public void onFinish(BillRecord data) {
-
-            }
-
-            @Override
-            public void onError(int errorCode, String msg) {
-
-            }
-        });
+//        PaymentInfo.getBillRecords( null, null, 10, 1, new CallBackListener<BillRecord>() {
+//            @Override
+//            public void onFinish(BillRecord data) {
+//
+//            }
+//
+//            @Override
+//            public void onError(int errorCode, String msg) {
+//
+//            }
+//        });
     }
 
 
