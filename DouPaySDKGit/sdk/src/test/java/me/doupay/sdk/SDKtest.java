@@ -74,8 +74,8 @@ public class SDKtest {
 
     @Test
     public void getPay() {
-                 initAllParameters();
-                String orderNo = "SJDD" + String.valueOf(System.currentTimeMillis());
+        initAllParameters();
+        String orderNo = "SJDD" + String.valueOf(System.currentTimeMillis());
 
         BaseVo<PayResponseData> baseVo = PaymentInfo.pay("1", CoinNameEnum.TRX, CurrencyCodeEnum.CNY, "17701278888", orderNo,
                 "我很好啊啊", "", "", OrderTypeCodeEnum.BY_AMOUNT);
@@ -148,7 +148,7 @@ public class SDKtest {
     public void withdraw() {
         initAllParameters();
         String orderNo = "SHYH" + String.valueOf(System.currentTimeMillis());
-        BaseVo<WithdrawResponse> baseVo = PaymentInfo.withdraw("TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "0.07", "0004", orderNo, orderNo);
+        BaseVo<WithdrawResponse> baseVo = PaymentInfo.withdraw("TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "0.07", CoinNameEnum.USDT, orderNo, orderNo);
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {

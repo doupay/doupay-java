@@ -275,7 +275,7 @@ public class PaymentInfo {
      * @param merchantUser     	   商家用户【长度10到20之间】
      * @param orderNo              订单号【长度10到30】
      */
-    public  static BaseVo<WithdrawResponse> withdraw(String address,String amount,String coinName,String merchantUser,String orderNo) {
+    public  static BaseVo<WithdrawResponse> withdraw(String address,String amount,CoinNameEnum coinName,String merchantUser,String orderNo) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
             return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
         }
