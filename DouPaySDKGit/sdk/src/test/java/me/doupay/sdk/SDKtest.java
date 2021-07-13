@@ -44,7 +44,7 @@ public class SDKtest {
         String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2BXDlBjD/ySSWxg3Av/fwpyVGbwTG44aEWzQLvvjNxKTNmTtdlSd1Y0d0+4zY8t4H3ND4au969FEkeuqIJBdUroOHvfS4QNlr1TMIfCezB12j2i1lAHx7UEyusfoA8NkIYpv2BB57jW9mi10hiakAgD672shxdgSdT8VKoKz4rsTHHJVoDdPcrJXUOIFky8gb6KR+qP1jMDMHxlCb/HVGT4JUbwXcSsYr6zXitXzO5eyEzAYhiK3j3RG9HxYT/AcleLo/Grl+ZrJ0Swzas1DvKnqUjYHCvLrjtmrWuQ2RX3DZWE3CQQVifL4ZB+KHAi8ceRz3mbfdmT7Yx3bBUWBUQIDAQAB";
         Constants.openSysLog = true;
         Constants.getInstance().init(secret,privateKey,publicKey,appId,"86400");
-//        Constants.setBasrUrl("http://192.168.10.129:900/");
+        Constants.setBasrUrl("http://192.168.10.126:9000/");
     }
 
     @Test
@@ -78,7 +78,7 @@ public class SDKtest {
         initAllParameters();
         String orderNo = "SJDD" + String.valueOf(System.currentTimeMillis());
 
-        BaseVo<PayResponseData> baseVo = PaymentInfo.pay("1", CoinNameEnum.TRX, CurrencyCodeEnum.CNY, "17701278888", orderNo,
+        BaseVo<PayResponseData> baseVo = PaymentInfo.pay("10", CoinNameEnum.TRX, CurrencyCodeEnum.CNY, "17701278888", orderNo,
                 "我很好啊啊", "", "", OrderTypeCodeEnum.BY_AMOUNT);
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
@@ -102,7 +102,7 @@ public class SDKtest {
     @Test
     public void getOrderInfo() {
         initAllParameters();
-        BaseVo<OrderInfoResponseData> baseVo = PaymentInfo.getOrderInfo("ZF202107121428241334279126");
+        BaseVo<OrderInfoResponseData> baseVo = PaymentInfo.getOrderInfo("ZF202107132020338506462587");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
@@ -125,7 +125,7 @@ public class SDKtest {
     @Test
     public void getRefund() {
         initAllParameters();
-        BaseVo<RefundResponseData> baseVo = PaymentInfo.refund("TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "5", "ZF202107121428241334279126", "退0.5个,啦啦啦");
+        BaseVo<RefundResponseData> baseVo = PaymentInfo.refund("", "1", "ZF202107132020338506462587", "退0.5个,啦啦啦");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
@@ -137,7 +137,7 @@ public class SDKtest {
     public void getRefundInfo() {
         initAllParameters();
 
-        BaseVo<RefundInfoResponseData> baseVo = PaymentInfo.getRefunds("ZF202107121428241334279126");
+        BaseVo<RefundInfoResponseData> baseVo = PaymentInfo.getRefunds("ZF202107132020338506462587");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
@@ -157,6 +157,16 @@ public class SDKtest {
         }
     }
 
+    @Test
+    public void makeup() {
+        initAllParameters();
+        BaseVo<MakeUpResponse> baseVo = PaymentInfo.maleUp("ZF202107132020338506462587");
+        if (baseVo.getCode() == 200) {
+            System.out.println("-------------------------" + baseVo.getData().toString());
+        }else {
+            System.out.println(baseVo.getCode() + "-------------------------" + baseVo.getMsg());
+        }
+    }
 
     @Test
     public void verifySignAndGetResult () {
@@ -178,6 +188,16 @@ public class SDKtest {
         }, new CallBackListener<UserWithdrawCallBackResponse>() {
             @Override
             public void onFinish(UserWithdrawCallBackResponse data) {
+                System.out.println("UserWithdrawCallBackResponse = " + data.toString());
+            }
+
+            @Override
+            public void onError(int errorCode, String msg) {
+                System.out.println("errorCode=" + errorCode + "msg =" + msg);
+            }
+        }, new CallBackListener<MakeUpCallBackResponse>() {
+            @Override
+            public void onFinish(MakeUpCallBackResponse data) {
                 System.out.println("UserWithdrawCallBackResponse = " + data.toString());
             }
 

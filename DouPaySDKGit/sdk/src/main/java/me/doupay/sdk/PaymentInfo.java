@@ -188,9 +188,35 @@ public class PaymentInfo {
     }
 
     /**
-     * 取消订单
-     * @param orderCode 订单号
+     * 补单
+     * @param orderCode  orderCode
+     * @return
      */
+    public static BaseVo<MakeUpResponse> maleUp(String orderCode) {
+        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+
+        }
+        if (orderCode == null || orderCode.equals("")) {
+            return new BaseVo<>(9999,"缺少必要的参数");
+        }
+        Map<String,Object> map = new HashMap<>();
+        map.put("orderCode",orderCode);
+        map.put("appId",Constants.getAppId());
+
+        Call<BaseVo<MakeUpResponse>> baseVoCall =  ServerApi.SERVICE_API.makeup(Constants.basrUrl + "trade/makeUpOrder",map);
+        try {
+            BaseVo<MakeUpResponse> body = baseVoCall.execute().body();
+            return body;
+        }catch (Exception e) {
+            return new BaseVo<>(9999,e.getMessage());
+        }
+    }
+
+        /**
+         * 取消订单
+         * @param orderCode 订单号
+         */
     public static BaseVo<PayResponseData> cancleOrder (String orderCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
             return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
@@ -223,7 +249,7 @@ public class PaymentInfo {
             return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
 
         }
-        if (address ==null || amount == null || remark == null || orderCode == null || remark.isEmpty() || orderCode.isEmpty() || amount.isEmpty() || address.isEmpty()) {
+        if ( amount == null || remark == null || orderCode == null || remark.isEmpty() || orderCode.isEmpty() || amount.isEmpty()) {
             return new BaseVo<>(9999,"缺少必要的参数");
         }
 
@@ -232,7 +258,9 @@ public class PaymentInfo {
         map.put("amount",amount);
         map.put("appId",Constants.getAppId());
         map.put("orderCode",orderCode);
-        map.put("address",address);
+        if (address != null && !address.isEmpty()) {
+            map.put("address",address);
+        }
         Call<BaseVo<RefundResponseData>> baseVoCall =  ServerApi.SERVICE_API.gotoRefund(Constants.basrUrl + "trade/refund",map);
         try {
             BaseVo<RefundResponseData> body = baseVoCall.execute().body();
@@ -336,13 +364,29 @@ public class PaymentInfo {
      * @param bodyString  body体内容
      * @param listener 回调结果
      */
-    public  static void verifySignAndGetResult (String headerSignString,String bodyString,CallBackListener<PaymentCallBackResponse> listener,CallBackListener<UserWithdrawCallBackResponse> withdrawCalllBack) {
+    public  static void verifySignAndGetResult (String headerSignString,String bodyString,CallBackListener<PaymentCallBackResponse> listener,CallBackListener<UserWithdrawCallBackResponse> withdrawCalllBack,CallBackListener<MakeUpCallBackResponse> makeUpCallBackResponseCallBack) {
         if (Constants.getSecret().isEmpty() || Constants.getPublicKey().isEmpty()) {
-            listener.onError(9999,"请先调用Constants.getInstance().init()");
+            if (listener != null) {
+                listener.onError(9999,"请先调用Constants.getInstance().init()");
+            }
+            if (withdrawCalllBack != null) {
+                withdrawCalllBack.onError(9999,"请先调用Constants.getInstance().init()");
+            }
+            if (makeUpCallBackResponseCallBack != null) {
+                makeUpCallBackResponseCallBack.onError(9999,"请先调用Constants.getInstance().init()");
+            }
             return;
         }
         if (headerSignString == null || headerSignString.isEmpty() || bodyString == null || bodyString.isEmpty()) {
-            listener.onError(9999,"请传入签名和body体");
+            if (listener != null) {
+                listener.onError(9999,"请传入签名和body体");
+            }
+            if (withdrawCalllBack != null) {
+                withdrawCalllBack.onError(9999,"请传入签名和body体");
+            }
+            if (makeUpCallBackResponseCallBack != null) {
+                makeUpCallBackResponseCallBack.onError(9999,"请传入签名和body体");
+            }
             return;
         }
 
@@ -382,7 +426,16 @@ public class PaymentInfo {
             UserWithdrawCallBackResponse userWithdrawCallBackResponse = new UserWithdrawCallBackResponse(orderCode,type,coinCode,coinName,address,amount,result);
             withdrawCalllBack.onFinish(userWithdrawCallBackResponse);
         }
-
+        else if (type.equals("makeUp")) { /// 补单
+            if (!isRight) { // 验签失败
+                makeUpCallBackResponseCallBack.onError(9999,"验签失败");
+                return;
+            }
+            String orderCode = jsonObject.getString("orderCode");
+            boolean result = jsonObject.getBoolean("result");
+            MakeUpCallBackResponse make = new  MakeUpCallBackResponse(orderCode,type,result);
+            makeUpCallBackResponseCallBack.onFinish(make);
+        }
     }
 
     /**

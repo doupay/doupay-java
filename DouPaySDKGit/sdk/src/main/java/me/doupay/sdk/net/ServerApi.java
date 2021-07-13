@@ -79,4 +79,11 @@ public interface ServerApi {
          * 用户提现
          * */
     Call<BaseVo<WithdrawResponse>> withdraw(@Url String url, @FieldMap Map<String, Object> body);
+
+    @FormUrlEncoded
+    @POST()
+        /*
+         * 补单
+         * */
+    Call<BaseVo<MakeUpResponse>> makeup(@Url String url, @FieldMap Map<String, Object> body);
 }
