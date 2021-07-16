@@ -421,12 +421,11 @@ public class PaymentInfo {
                 return;
             }
             String orderCode = jsonObject.getString("orderCode");
-            String coinCode = jsonObject.getString("coinCode");
             String coinName = jsonObject.getString("coinName");
             String address = jsonObject.getString("address");
             String amount = jsonObject.getString("amount");
             boolean result = jsonObject.getBoolean("result");
-            UserWithdrawCallBackResponse userWithdrawCallBackResponse = new UserWithdrawCallBackResponse(orderCode,type,coinCode,coinName,address,amount,result);
+            UserWithdrawCallBackResponse userWithdrawCallBackResponse = new UserWithdrawCallBackResponse(orderCode,type,coinName,address,amount,result);
             withdrawCalllBack.onFinish(userWithdrawCallBackResponse);
         }
         else if (type.equals("makeUp")) { /// 补单

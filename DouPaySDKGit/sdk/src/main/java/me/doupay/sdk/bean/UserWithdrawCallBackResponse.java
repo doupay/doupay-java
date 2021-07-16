@@ -7,10 +7,9 @@ public class UserWithdrawCallBackResponse {
     /// 订单类型
     private String orderType ;
 
-    /// 币种代码
-    private String coinCode;
-    /// 币种代码
+    /// 币种名称
     private String coinName;
+
     /// 地址
     private String address;
 
@@ -36,12 +35,12 @@ public class UserWithdrawCallBackResponse {
         this.orderType = orderType;
     }
 
-    public String getCoinCode() {
-        return coinCode;
+    public String getCoinName() {
+        return coinName;
     }
 
-    public void setCoinCode(String coinCode) {
-        this.coinCode = coinCode;
+    public void setCoinName(String coinName) {
+        this.coinName = coinName;
     }
 
     public String getAddress() {
@@ -68,10 +67,9 @@ public class UserWithdrawCallBackResponse {
         this.result = result;
     }
 
-    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinCode, String coinName,String address, String amount, boolean result) {
+    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinName,String address, String amount, boolean result) {
         this.orderCode = orderCode;
         this.orderType = orderType;
-        this.coinCode = coinCode;
         this.coinName = coinName;
         this.address = address;
         this.amount = amount;
@@ -83,7 +81,6 @@ public class UserWithdrawCallBackResponse {
         return "UserWithdrawCallBackResponse{" +
                 "orderCode='" + orderCode + '\'' +
                 ", orderType='" + orderType + '\'' +
-                ", coinCode='" + coinCode + '\'' +
                 ", address='" + address + '\'' +
                 ", amount='" + amount + '\'' +
                 ", result=" + result +

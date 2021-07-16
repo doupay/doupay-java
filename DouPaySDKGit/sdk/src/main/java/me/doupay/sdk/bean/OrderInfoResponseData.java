@@ -40,7 +40,6 @@ public class OrderInfoResponseData {
     private String appId;
     private String body;
     private String code;
-    private String coinCode;
     private String coinName;
     private String currency;
     private String description;
@@ -121,14 +120,6 @@ public class OrderInfoResponseData {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public String getCoinCode() {
-        return coinCode;
-    }
-
-    public void setCoinCode(String coinCode) {
-        this.coinCode = coinCode;
     }
 
     public String getCurrency() {
@@ -267,18 +258,9 @@ public class OrderInfoResponseData {
          * isDefault : 0
          */
 
-        private String coinCode;
         private String coinName;
         private int isDefault;
         private List<ChainInfosBean> chainInfos;
-
-        public String getCoinCode() {
-            return coinCode;
-        }
-
-        public void setCoinCode(String coinCode) {
-            this.coinCode = coinCode;
-        }
 
         public String getCoinName() {
             return coinName;
@@ -287,8 +269,7 @@ public class OrderInfoResponseData {
         @Override
         public String toString() {
             return "PaymentInfoBean{" +
-                    "coinCode='" + coinCode + '\'' +
-                    ", coinName='" + coinName + '\'' +
+                    "coinName='" + coinName + '\'' +
                     ", isDefault=" + isDefault +
                     ", chainInfos=" + chainInfos +
                     '}';
@@ -425,7 +406,6 @@ public class OrderInfoResponseData {
                 ", appId='" + appId + '\'' +
                 ", body='" + body + '\'' +
                 ", code='" + code + '\'' +
-                ", coinCode='" + coinCode + '\'' +
                 ", coinName='" + coinName + '\'' +
                 ", currency='" + currency + '\'' +
                 ", description='" + description + '\'' +
