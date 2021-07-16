@@ -114,7 +114,7 @@ public class SDKtest {
     public void getPaymentInfo() {
         initAllParameters();
 
-        BaseVo<PaymentInfoResponseData> baseVo =  PaymentInfo.getPaymentInfo("0001","" ,"ZF202107031353384554486189");
+        BaseVo<PaymentInfoResponseData> baseVo =  PaymentInfo.getPaymentInfo(CoinNameEnum.USDT,"" ,"ZF202107031353384554486189");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {

@@ -82,21 +82,21 @@ public class PaymentInfo {
 
     /**
      * 获取支付信息
-     * @param coinCode  币种代码【长度4】
+     * @param coinName  币种名称
      * @param chainCoinCode 链币种代码【长度4】,非必传
      * @param orderCode 订单号【长度10到30】
      */
-    public static  BaseVo<PaymentInfoResponseData> getPaymentInfo (String coinCode,String chainCoinCode, String orderCode) {
+    public static  BaseVo<PaymentInfoResponseData> getPaymentInfo (CoinNameEnum coinName,String chainCoinCode, String orderCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
             return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
         }
 
-        if (orderCode == null || coinCode == null || orderCode.isEmpty() || coinCode.isEmpty()) {
+        if (orderCode == null || coinName == null || orderCode.isEmpty()) {
             return new BaseVo<>(9999,"缺少必要参数");
         }
 
         Map<String,Object> map = new HashMap<>();
-        map.put("coinCode",coinCode);
+        map.put("coinName",coinName);
         map.put("orderCode",orderCode);
         if (chainCoinCode != null && !chainCoinCode.isEmpty()) {
             map.put("chainCoinCode",chainCoinCode);
