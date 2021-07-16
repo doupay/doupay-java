@@ -1,6 +1,7 @@
 package me.doupay.sdk;
 
 import me.doupay.sdk.bean.*;
+import me.doupay.sdk.enums.RefundType;
 import me.doupay.sdk.interfaceCallback.CallBackListener;
 import me.doupay.sdk.net.BaseVo;
 import me.doupay.sdk.net.ServerApi;
@@ -244,16 +245,18 @@ public class PaymentInfo {
      * @param orderCode     订单编号【长度5到50】
      * @param remark   退款描述【长度5到50】
      */
-    public  static BaseVo<RefundResponseData> refund(String address,String amount,String orderCode,String remark) {
+    public  static BaseVo<RefundResponseData> refund(RefundType refundType, String address, String amount, String orderCode, String remark) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
             return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
 
         }
-        if ( amount == null || remark == null || orderCode == null || remark.isEmpty() || orderCode.isEmpty() || amount.isEmpty()) {
+        if ( refundType == null || amount == null || remark == null || orderCode == null
+                || remark.isEmpty() || orderCode.isEmpty() || amount.isEmpty()) {
             return new BaseVo<>(9999,"缺少必要的参数");
         }
 
         Map<String,Object> map = new HashMap<>();
+        map.put("refundType",refundType);
         map.put("remark",remark);
         map.put("amount",amount);
         map.put("appId",Constants.getAppId());

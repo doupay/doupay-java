@@ -1,6 +1,7 @@
 package me.doupay.sdk;
 
 import me.doupay.sdk.bean.*;
+import me.doupay.sdk.enums.RefundType;
 import me.doupay.sdk.interfaceCallback.CallBackListener;
 import me.doupay.sdk.net.BaseVo;
 import org.junit.Test;
@@ -125,7 +126,7 @@ public class SDKtest {
     @Test
     public void getRefund() {
         initAllParameters();
-        BaseVo<RefundResponseData> baseVo = PaymentInfo.refund("", "1", "ZF202107132020338506462587", "退0.5个,啦啦啦");
+        BaseVo<RefundResponseData> baseVo = PaymentInfo.refund(RefundType.NEW_ADDRESS,"", "1", "ZF202107132020338506462587", "退0.5个,啦啦啦");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
