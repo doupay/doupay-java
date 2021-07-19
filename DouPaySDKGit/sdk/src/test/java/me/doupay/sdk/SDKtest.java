@@ -161,7 +161,7 @@ public class SDKtest {
     @Test
     public void makeup() {
         initAllParameters();
-        BaseVo<MakeUpResponse> baseVo = PaymentInfo.maleUp("ZF202107132020338506462587");
+        BaseVo<MakeUpResponse> baseVo = PaymentInfo.maleUp("需要补单","ZF202107132020338506462587");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
