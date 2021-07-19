@@ -16,7 +16,7 @@
   <dependency>
 	  <groupId>com.github.doupay</groupId>
 	  <artifactId>doupay-java</artifactId>
-	  <version>Tag</version>
+	  <version>0.0.1</version>
    </dependency>
 ```
 #### 示例截图如下:
