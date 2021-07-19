@@ -19,6 +19,7 @@
 	  <version>0.0.1</version>
    </dependency>
 ```
+
 #### 示例截图如下:
 图中示例版本号"0.0.1"会随时变化,请随时关注本github更新
 
@@ -26,6 +27,6 @@
 
 ### 项目中调用初始化方法,示例如下:
 
-<img width="1185" alt="WX20210709-170532@2x" src="https://user-images.githubusercontent.com/86946898/125053782-16805900-e0d8-11eb-9613-5b1fb85a3493.png">
+<img width="1212" alt="WX20210719-150251@2x" src="https://user-images.githubusercontent.com/86946898/126117050-cfe124c1-5a86-4101-8ab8-ecd051b2d8bb.png">
 
 sdk中各方法请求和响应参数,请参照[wiki](https://github.com/doupay/doupay-java/wiki)
