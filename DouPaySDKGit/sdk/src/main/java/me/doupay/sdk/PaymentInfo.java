@@ -193,18 +193,19 @@ public class PaymentInfo {
      * @param orderCode  orderCode
      * @return
      */
-    public static BaseVo<MakeUpResponse> maleUp(String orderCode) {
+    public static BaseVo<MakeUpResponse> maleUp(String remark, String orderCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
             return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
 
         }
-        if (orderCode == null || orderCode.equals("")) {
+        if (orderCode == null || remark == null || orderCode.equals("") || remark.equals("")) {
             return new BaseVo<>(9999,"缺少必要的参数");
         }
+
         Map<String,Object> map = new HashMap<>();
         map.put("orderCode",orderCode);
         map.put("appId",Constants.getAppId());
-
+        map.put("remark",remark);
         Call<BaseVo<MakeUpResponse>> baseVoCall =  ServerApi.SERVICE_API.makeup(Constants.basrUrl + "trade/makeUpOrder",map);
         try {
             BaseVo<MakeUpResponse> body = baseVoCall.execute().body();
