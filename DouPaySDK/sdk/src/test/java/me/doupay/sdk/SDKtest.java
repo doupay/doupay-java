@@ -19,7 +19,7 @@ public class SDKtest {
         String privateKey = "xxx";
         String publicKey = "xxxx";
         Constants.openSysLog = true;
-        Constants.getInstance().init(secret,privateKey,publicKey,appId,"86400");
+        Constants.getInstance().init(secret,privateKey,publicKey,appId,"3600");
     }
 
     @Test
