@@ -15,6 +15,7 @@ enum class ExceString(
     ServerParseError("Parse error", "解析错误"),
     ServerUnknown("unknown error", "未知错误");
 
+
     companion object {
         fun getString(str: ExceString): String {
             return when (language) {

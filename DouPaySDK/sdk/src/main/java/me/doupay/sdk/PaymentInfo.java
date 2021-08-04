@@ -5,6 +5,7 @@ import me.doupay.sdk.enums.RefundType;
 import me.doupay.sdk.interfaceCallback.CallBackListener;
 import me.doupay.sdk.net.BaseVo;
 import me.doupay.sdk.net.ServerApi;
+import me.doupay.sdk.net.exception.ApiString;
 import me.doupay.sdk.sign.AES;
 import me.doupay.sdk.sign.RSAUtils;
 import org.json.JSONObject;
@@ -22,7 +23,7 @@ public class PaymentInfo {
      */
     public static BaseVo<CoinResponseData>  getCoinList () {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+            return new BaseVo<>(9999, ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
         Map<String,Object> map = new HashMap<>();
         map.put("test","test");
@@ -40,7 +41,7 @@ public class PaymentInfo {
      */
     public static BaseVo<CurrencyResponseData> getCurrencyList() {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
 
         }
         Map<String,Object> map = new HashMap<>();
@@ -60,12 +61,12 @@ public class PaymentInfo {
      */
     public  static   BaseVo<OrderInfoResponseData> getOrderInfo(String orderCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
 
 
         if (orderCode == null || orderCode.isEmpty()) {
-            return new BaseVo<>(9999,"缺少必要参数");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
 
         Map<String,Object> map = new HashMap<>();
@@ -90,11 +91,11 @@ public class PaymentInfo {
      */
     public static  BaseVo<PaymentInfoResponseData> getPaymentInfo (CoinNameEnum coinName,String chainCoinCode, String orderCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
 
         if (orderCode == null || coinName == null || orderCode.isEmpty()) {
-            return new BaseVo<>(9999,"缺少必要参数");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
 
         Map<String,Object> map = new HashMap<>();
@@ -130,29 +131,29 @@ public class PaymentInfo {
             String body, String description,
             OrderTypeCodeEnum orderType ) {
         if (!Constants.getInstance().isInitAllParameters()) {
-            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
         if ( orderNo == null || orderType == null
                 || subject == null ||  orderNo.isEmpty()  || subject.isEmpty()
             ) {
-            return new BaseVo<>(9999,"缺少必要的参数");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
 
         if (orderType != OrderTypeCodeEnum.BY_AMOUNT
                 && orderType != OrderTypeCodeEnum.BY_MONEY) {
-            return new BaseVo<>(9999,"orderType订单类型【BY_AMOUNT、BY_MONEY】");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError7));
         }
 
         if (orderType == OrderTypeCodeEnum.BY_MONEY) {
             if (currencyCode == null || money == null || money.equals("")) {
-                return new BaseVo<>(9999,"currencyCode和money不能为空");
+                return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError1));
 
             }
         }
 
         if (orderType == OrderTypeCodeEnum.BY_AMOUNT) {
             if (coinName == null || amount == null || amount.equals("")) {
-                return new BaseVo<>(9999,"coinName和amount参数不能为空");
+                return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError2));
             }
         }
 
@@ -194,11 +195,11 @@ public class PaymentInfo {
      */
     public static BaseVo<MakeUpResponse> maleUp(String remark, String orderCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
 
         }
         if (orderCode == null || remark == null || orderCode.equals("") || remark.equals("")) {
-            return new BaseVo<>(9999,"缺少必要的参数");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
 
         Map<String,Object> map = new HashMap<>();
@@ -222,11 +223,11 @@ public class PaymentInfo {
      */
     public static BaseVo<PaymentCallBackResponse> getCallback(String orderCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
 
         }
         if (orderCode == null || orderCode.equals("")) {
-            return new BaseVo<>(9999,"缺少必要的参数");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
 
         Map<String,Object> map = new HashMap<>();
@@ -246,11 +247,11 @@ public class PaymentInfo {
          */
     public static BaseVo<PayResponseData> cancleOrder (String orderCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
 
         }
         if (orderCode == null || orderCode.equals("")) {
-            return new BaseVo<>(9999,"缺少必要的参数");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
         Map<String,Object> map = new HashMap<>();
         map.put("orderCode",orderCode);
@@ -273,12 +274,12 @@ public class PaymentInfo {
      */
     public  static BaseVo<RefundResponseData> refund(RefundType refundType, String address, String amount, String orderCode, String remark) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
 
         }
         if ( refundType == null || amount == null || remark == null || orderCode == null
                 || remark.isEmpty() || orderCode.isEmpty() || amount.isEmpty()) {
-            return new BaseVo<>(9999,"缺少必要的参数");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
         String appId = Constants.getAppId();
         String timestamp = System.currentTimeMillis() + "";
@@ -309,11 +310,11 @@ public class PaymentInfo {
      */
     public  static BaseVo<RefundInfoResponseData> getRefunds(String orderCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
 
         if (orderCode == null || orderCode.isEmpty() ) {
-            return new BaseVo<>(9999,"缺少必要参数");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
 
         Map<String,Object> map = new HashMap<>();
@@ -338,21 +339,21 @@ public class PaymentInfo {
      */
     public  static BaseVo<WithdrawResponse> withdraw(String address,String amount,CoinNameEnum coinName,String merchantUser,String orderNo,String money,OrderTypeCodeEnum orderType,CurrencyCodeEnum currencyCode ) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
         if (address == null  || coinName == null || merchantUser == null || orderNo == null) {
-            return new BaseVo<>(9999,"缺少必要参数");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
         Map<String,Object> map = new HashMap<>();
         if (orderType == OrderTypeCodeEnum.BY_AMOUNT) {
             if (amount == null || amount.equals("")) {
-                return new BaseVo<>(9999,"缺少amount参数");
+                return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError3));
             }
             map.put("amount",amount);
         }
         if (orderType == OrderTypeCodeEnum.BY_MONEY) {
             if (money == null || money.equals("")) {
-                return new BaseVo<>(9999,"缺少money参数");
+                return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError4));
             }
             map.put("money",money);
             map.put("currency",currencyCode);
@@ -385,16 +386,16 @@ public class PaymentInfo {
      */
     public  static BaseVo<CoinPriceResponse> getCoinPrice(String amount,String money,OrderTypeCodeEnum orderTypeCodeEnum,CoinNameEnum coinName,CurrencyCodeEnum currencyCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            return new BaseVo<>(9999, "请先调用Constants.getInstance().init()");
+            return new BaseVo<>(9999, ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
         if (orderTypeCodeEnum == OrderTypeCodeEnum.BY_AMOUNT) {
             if (coinName == null || amount == null || amount.equals("")) {
-                return new BaseVo<>(9999, "coinName和amount参数不能为空");
+                return new BaseVo<>(9999, ApiString.Companion.getString(ApiString.ApiDismissParameterError2));
             }
         }
         if (orderTypeCodeEnum == OrderTypeCodeEnum.BY_MONEY) {
             if (currencyCode == null || money == null || money.equals("")) {
-                return new BaseVo<>(9999, "currencyCode和money参数不能为空");
+                return new BaseVo<>(9999, ApiString.Companion.getString(ApiString.ApiDismissParameterError1));
             }
         }
 
@@ -427,7 +428,7 @@ public class PaymentInfo {
      */
     public  static BaseVo<BillRecord> getBillRecords( LocalDateTime startTime,LocalDateTime endTime,Integer pageSize,Integer pageNo) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
-            return new BaseVo<>(9999,"请先调用Constants.getInstance().init()");
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
         Map<String,Object> map = new HashMap<>();
         map.put("appId",Constants.getAppId());
@@ -457,25 +458,25 @@ public class PaymentInfo {
     public  static void verifySignAndGetResult (String headerSignString,String bodyString,CallBackListener<PaymentCallBackResponse> listener,CallBackListener<UserWithdrawCallBackResponse> withdrawCalllBack,CallBackListener<MakeUpCallBackResponse> makeUpCallBackResponseCallBack) {
         if (Constants.getSecret().isEmpty() || Constants.getPublicKey().isEmpty()) {
             if (listener != null) {
-                listener.onError(9999,"请先调用Constants.getInstance().init()");
+                listener.onError(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
             }
             if (withdrawCalllBack != null) {
-                withdrawCalllBack.onError(9999,"请先调用Constants.getInstance().init()");
+                withdrawCalllBack.onError(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
             }
             if (makeUpCallBackResponseCallBack != null) {
-                makeUpCallBackResponseCallBack.onError(9999,"请先调用Constants.getInstance().init()");
+                makeUpCallBackResponseCallBack.onError(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
             }
             return;
         }
         if (headerSignString == null || headerSignString.isEmpty() || bodyString == null || bodyString.isEmpty()) {
             if (listener != null) {
-                listener.onError(9999,"请传入签名和body体");
+                listener.onError(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError5));
             }
             if (withdrawCalllBack != null) {
-                withdrawCalllBack.onError(9999,"请传入签名和body体");
+                withdrawCalllBack.onError(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError5));
             }
             if (makeUpCallBackResponseCallBack != null) {
-                makeUpCallBackResponseCallBack.onError(9999,"请传入签名和body体");
+                makeUpCallBackResponseCallBack.onError(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError5));
             }
             return;
         }
@@ -490,7 +491,7 @@ public class PaymentInfo {
 
         if (type.equals("payment")) { /// 用户付款
             if (!isRight) { // 验签失败
-                listener.onError(9999,"验签失败");
+                listener.onError(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError6));
                 return;
             }
             String orderCode = jsonObject.getString("orderCode");
@@ -506,7 +507,7 @@ public class PaymentInfo {
             listener.onFinish(resultResponse);
         }else if (type.equals("withdraw")) { /// 用户提币
             if (!isRight) { // 验签失败
-                withdrawCalllBack.onError(9999,"验签失败");
+                withdrawCalllBack.onError(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError6));
                 return;
             }
             String orderCode = jsonObject.getString("orderCode");
@@ -524,7 +525,7 @@ public class PaymentInfo {
         }
         else if (type.equals("makeUp")) { /// 补单
             if (!isRight) { // 验签失败
-                makeUpCallBackResponseCallBack.onError(9999,"验签失败");
+                makeUpCallBackResponseCallBack.onError(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError6));
                 return;
             }
             String orderCode = jsonObject.getString("orderCode");

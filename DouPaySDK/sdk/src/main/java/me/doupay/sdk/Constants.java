@@ -23,6 +23,14 @@ public class Constants {
         Constants.basrUrl = basrUrl;
     }
 
+    public static Language getLanguage() {
+        return language;
+    }
+
+    public static void setLanguage(Language language) {
+        Constants.language = language;
+    }
+
     /**
      *
      * @param secret secket
