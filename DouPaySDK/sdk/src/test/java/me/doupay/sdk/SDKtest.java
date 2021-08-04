@@ -47,7 +47,7 @@ public class SDKtest {
         Constants.openSysLog = true;
         Constants.getInstance().init(secret,privateKey,publicKey,appId,"3600");
         Constants.setBasrUrl("http://192.168.10.129:9000/");
-        Constants.setLanguage(Language.zh_CH);
+        Constants.setLanguage(Language.en_US);
     }
 
     @Test
