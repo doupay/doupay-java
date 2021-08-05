@@ -63,7 +63,7 @@ Constants.setLanguage(Language.en_US);/// 英文
 
 ### 项目中调用初始化方法,示例如下:
 
-![1111](https://user-images.githubusercontent.com/86946898/126156599-e3527fa4-4848-423a-b344-b383fc67fffb.png)
+![111](https://user-images.githubusercontent.com/86946898/128279082-9869ff2e-e370-4cb4-b5f9-944f4a33389c.png)
 
 #### secret为商户管理后台创建app得到的,appid为创建app得到的,privateKey为自己的私钥,publicKey为交换公钥后得到的平台公钥,expireTime为订单过期时间,秒为单位
 
