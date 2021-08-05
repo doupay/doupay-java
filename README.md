@@ -32,7 +32,7 @@
 
 ![111](https://user-images.githubusercontent.com/86946898/128279082-9869ff2e-e370-4cb4-b5f9-944f4a33389c.png)
 
-### 以下方法可以设置语言类别
+### 以下方法可以设置语言类别,在版本1.0.14以后支持
 
 ```java
 Constants.setLanguage(Language.zh_CH);/// 中文
