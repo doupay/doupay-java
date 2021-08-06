@@ -40,12 +40,8 @@ public class PaymentCallBackResponse {
      *金额
      */
     private String money;
-    /**
-     * 交易哈希
-     */
-    private String hashId;
 
-    public PaymentCallBackResponse(String orderCode, String coinName, String address, String amountPaid, String protocolName, Integer paymentStatus, boolean result, String price,String money,String hashId) {
+    public PaymentCallBackResponse(String orderCode, String coinName, String address, String amountPaid, String protocolName, Integer paymentStatus, boolean result, String price,String money) {
         this.orderCode = orderCode;
         this.coinName = coinName;
         this.address = address;
@@ -55,7 +51,6 @@ public class PaymentCallBackResponse {
         this.result = result;
         this.price = price;
         this.money = money;
-        this.hashId = hashId;
     }
 
     public String getOrderCode() {
@@ -130,13 +125,6 @@ public class PaymentCallBackResponse {
         this.money = money;
     }
 
-    public String getHashId() {
-        return hashId;
-    }
-
-    public void setHashId(String hashId) {
-        this.hashId = hashId;
-    }
 
     @Override
     public String toString() {
@@ -150,7 +138,6 @@ public class PaymentCallBackResponse {
                 ", result=" + result +
                 ", price='" + price + '\'' +
                 ", money='" + money + '\'' +
-                ", hashId='" + hashId + '\'' +
                 '}';
     }
 }
