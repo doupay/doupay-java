@@ -46,8 +46,8 @@ public class SDKtest {
         String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhl7C2UAO1DZYOYLK+6IN5zez+WOFpGiAeGjToLXVkPtVKY0iKR+sZIXvx1FdszQOaIDkPlHgbisi5HYoWayQ8Hj2+NylQ1pBz+xek/fl9DKpIb3jKrlZBI4jnkNNQTx2guGVM9BbnQBE52OMf4hB3OfCFpPDyuc5tEE10rZtYRNYbdGeR4xgm0esZYyS6CfwZ275mbcTxnHsa09xghsL5qQi+bwDvSOp9SKiCx4p79rtxhgQrBVCCFxP39E/RhSSeCh9iWwCL6kMEQYNEJHGWWCV1WDnJHIjjwIzoN/vSKXxFdjw1tigq8owNd0v3cffMOnYBLNiYtsFhswGB0t9CQIDAQAB";
         Constants.openSysLog = true;
         Constants.getInstance().init(secret,privateKey,publicKey,appId,"3600");
-        Constants.setBasrUrl("http://192.168.10.129:9000/");
-        Constants.setLanguage(Language.en_US);
+//        Constants.setBasrUrl("http://192.168.10.129:9000/");
+        Constants.setLanguage(Language.zh_CH);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class SDKtest {
         initAllParameters();
         String orderNo = "SJDD" + String.valueOf(System.currentTimeMillis());
 
-        BaseVo<PayResponseData> baseVo = PaymentInfo.pay("","10", CoinNameEnum.USDT, CurrencyCodeEnum.CNY, "17788888888", orderNo,
+        BaseVo<PayResponseData> baseVo = PaymentInfo.pay("","", CoinNameEnum.USDT, CurrencyCodeEnum.CNY, "17788888888", orderNo,
                 "我很好啊啊", "", "", OrderTypeCodeEnum.BY_AMOUNT);
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
@@ -93,7 +93,7 @@ public class SDKtest {
     public void cancle() {
         initAllParameters();
 
-        BaseVo<PayResponseData> baseVo =  PaymentInfo.cancleOrder("ZF202107261159264168428799");
+        BaseVo<PayResponseData> baseVo =  PaymentInfo.cancleOrder("ZF2021072611592641684287991");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
@@ -139,7 +139,7 @@ public class SDKtest {
     public void getRefundInfo() {
         initAllParameters();
 
-        BaseVo<RefundInfoResponseData> baseVo = PaymentInfo.getRefunds("ZF202107270223484993585691");
+        BaseVo<RefundInfoResponseData> baseVo = PaymentInfo.getRefunds("ZF202107280739365664124421");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {

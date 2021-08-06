@@ -503,7 +503,8 @@ public class PaymentInfo {
             Integer paymentStatus = jsonObject.getInt("paymentStatus");
             boolean result = jsonObject.getBoolean("result");
             String money = jsonObject.getString("money");
-            PaymentCallBackResponse resultResponse = new PaymentCallBackResponse(orderCode,coinName,address,amount,protocolName,paymentStatus,result,price,money);
+            String hashId = jsonObject.getString("hashId");
+            PaymentCallBackResponse resultResponse = new PaymentCallBackResponse(orderCode,coinName,address,amount,protocolName,paymentStatus,result,price,money,hashId);
             listener.onFinish(resultResponse);
         }else if (type.equals("withdraw")) { /// 用户提币
             if (!isRight) { // 验签失败
