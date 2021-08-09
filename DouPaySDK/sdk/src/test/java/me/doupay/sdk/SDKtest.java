@@ -46,7 +46,7 @@ public class SDKtest {
         String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhl7C2UAO1DZYOYLK+6IN5zez+WOFpGiAeGjToLXVkPtVKY0iKR+sZIXvx1FdszQOaIDkPlHgbisi5HYoWayQ8Hj2+NylQ1pBz+xek/fl9DKpIb3jKrlZBI4jnkNNQTx2guGVM9BbnQBE52OMf4hB3OfCFpPDyuc5tEE10rZtYRNYbdGeR4xgm0esZYyS6CfwZ275mbcTxnHsa09xghsL5qQi+bwDvSOp9SKiCx4p79rtxhgQrBVCCFxP39E/RhSSeCh9iWwCL6kMEQYNEJHGWWCV1WDnJHIjjwIzoN/vSKXxFdjw1tigq8owNd0v3cffMOnYBLNiYtsFhswGB0t9CQIDAQAB";
         Constants.openSysLog = true;
         Constants.getInstance().init(secret,privateKey,publicKey,appId,"3600");
-//        Constants.setBasrUrl("http://192.168.10.129:9000/");
+        Constants.setBasrUrl("http://192.168.11.113:9000/");
         Constants.setLanguage(Language.zh_CH);
     }
 
@@ -80,7 +80,7 @@ public class SDKtest {
         initAllParameters();
         String orderNo = "SJDD" + String.valueOf(System.currentTimeMillis());
 
-        BaseVo<PayResponseData> baseVo = PaymentInfo.pay("","", CoinNameEnum.USDT, CurrencyCodeEnum.CNY, "17788888888", orderNo,
+        BaseVo<PayResponseData> baseVo = PaymentInfo.pay("","10", CoinNameEnum.USDT, CurrencyCodeEnum.CNY, "17788888888", orderNo,
                 "我很好啊啊", "", "", OrderTypeCodeEnum.BY_AMOUNT);
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
@@ -151,7 +151,7 @@ public class SDKtest {
     public void withdraw() {
         initAllParameters();
         String orderNo = "SHYH" + String.valueOf(System.currentTimeMillis());
-        BaseVo<WithdrawResponse> baseVo = PaymentInfo.withdraw("TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "5", CoinNameEnum.USDT, orderNo, orderNo,"500",OrderTypeCodeEnum.BY_MONEY,CurrencyCodeEnum.CNY);
+        BaseVo<WithdrawResponse> baseVo = PaymentInfo.withdraw("TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "4", CoinNameEnum.USDT, orderNo, orderNo,"500",OrderTypeCodeEnum.BY_AMOUNT,CurrencyCodeEnum.CNY);
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
@@ -184,7 +184,7 @@ public class SDKtest {
     @Test
     public void getPrice() {
         initAllParameters();
-        BaseVo<CoinPriceResponse> baseVo = PaymentInfo.getCoinPrice("100","100",OrderTypeCodeEnum.BY_MONEY,CoinNameEnum.USDT,CurrencyCodeEnum.CNY);
+        BaseVo<CoinPriceResponse> baseVo = PaymentInfo.getCoinPrice(CoinNameEnum.USDT,CurrencyCodeEnum.CNY);
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {

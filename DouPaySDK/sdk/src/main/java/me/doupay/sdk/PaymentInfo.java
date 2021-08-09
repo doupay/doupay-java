@@ -384,33 +384,19 @@ public class PaymentInfo {
      * @param currencyCode currencyCodeEnum
      * @return
      */
-    public  static BaseVo<CoinPriceResponse> getCoinPrice(String amount,String money,OrderTypeCodeEnum orderTypeCodeEnum,CoinNameEnum coinName,CurrencyCodeEnum currencyCode) {
+    public  static BaseVo<CoinPriceResponse> getCoinPrice(CoinNameEnum coinName,CurrencyCodeEnum currencyCode) {
         if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
             return new BaseVo<>(9999, ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
-        if (orderTypeCodeEnum == OrderTypeCodeEnum.BY_AMOUNT) {
-            if (coinName == null || amount == null || amount.equals("")) {
-                return new BaseVo<>(9999, ApiString.Companion.getString(ApiString.ApiDismissParameterError2));
-            }
-        }
-        if (orderTypeCodeEnum == OrderTypeCodeEnum.BY_MONEY) {
-            if (currencyCode == null || money == null || money.equals("")) {
-                return new BaseVo<>(9999, ApiString.Companion.getString(ApiString.ApiDismissParameterError1));
-            }
+        if (coinName == null || currencyCode == null ) {
+            return new BaseVo<>(9999, ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
 
         Map<String,Object> map = new HashMap<>();
-        map.put("payType",orderTypeCodeEnum);
-        if (orderTypeCodeEnum == OrderTypeCodeEnum.BY_AMOUNT) {
-            map.put("coinName",coinName);
-            map.put("amount",amount);
-        }
-        if (orderTypeCodeEnum == OrderTypeCodeEnum.BY_MONEY) {
-            map.put("money",money);
-            map.put("currency",currencyCode);
-        }
+        map.put("coinName",coinName);
+        map.put("currency",currencyCode);
 
-        Call<BaseVo<CoinPriceResponse>> baseVoCall =   ServerApi.SERVICE_API.getPrice(Constants.basrUrl + "trade/getCoinPrice",map);
+        Call<BaseVo<CoinPriceResponse>> baseVoCall =   ServerApi.SERVICE_API.getPrice(Constants.basrUrl + "trade/getCurrencyCoinPrice",map);
         try {
             BaseVo<CoinPriceResponse> body = baseVoCall.execute().body();
             return body;
