@@ -20,7 +20,7 @@
   <dependency>
 	  <groupId>com.github.doupay</groupId>
 	  <artifactId>doupay-java</artifactId>
-	  <version>1.0.10</version>
+	  <version>1.0.16</version>
    </dependency>
 ```
 #### 示例截图如下:
