@@ -3,6 +3,11 @@ package me.doupay.sdk.bean;
 public class PaymentCallBackResponse {
 
     /**
+     * 订单类型
+     */
+    private String orderType;
+
+    /**
      * 支付订单号
      */
     private String orderCode;
@@ -41,7 +46,8 @@ public class PaymentCallBackResponse {
      */
     private String money;
 
-    public PaymentCallBackResponse(String orderCode, String coinName, String address, String amountPaid, String protocolName, Integer paymentStatus, boolean result, String price,String money) {
+    public PaymentCallBackResponse(String orderType,String orderCode, String coinName, String address, String amountPaid, String protocolName, Integer paymentStatus, boolean result, String price,String money) {
+        this.orderType = orderType;
         this.orderCode = orderCode;
         this.coinName = coinName;
         this.address = address;
@@ -125,11 +131,19 @@ public class PaymentCallBackResponse {
         this.money = money;
     }
 
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
+    }
 
     @Override
     public String toString() {
         return "PaymentCallBackResponse{" +
-                "orderCode='" + orderCode + '\'' +
+                "orderType='" + orderType + '\'' +
+                ", orderCode='" + orderCode + '\'' +
                 ", coinName='" + coinName + '\'' +
                 ", address='" + address + '\'' +
                 ", amountPaid='" + amountPaid + '\'' +

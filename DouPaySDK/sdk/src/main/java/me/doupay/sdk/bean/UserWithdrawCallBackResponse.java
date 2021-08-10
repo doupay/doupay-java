@@ -10,11 +10,14 @@ public class UserWithdrawCallBackResponse {
     /// 币种名称
     private String coinName;
 
+    /// 协议名称
+    private String protocolName;
+
     /// 地址
     private String address;
 
     /// 数量
-    private String amount;
+    private String amountPaid;
 
     /// 结果
     private boolean result;
@@ -63,12 +66,12 @@ public class UserWithdrawCallBackResponse {
         this.address = address;
     }
 
-    public String getAmount() {
-        return amount;
+    public String getAmountPaid() {
+        return amountPaid;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setAmountPaid(String amountPaid) {
+        this.amountPaid = amountPaid;
     }
 
     public boolean getResult() {
@@ -111,12 +114,21 @@ public class UserWithdrawCallBackResponse {
         this.hashId = hashId;
     }
 
-    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinName, String address, String amount, boolean result, String price, String money, String currency,String hashId) {
+    public String getProtocolName() {
+        return protocolName;
+    }
+
+    public void setProtocolName(String protocolName) {
+        this.protocolName = protocolName;
+    }
+
+    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinName,String protocolName	, String address, String amountPaid, boolean result, String price, String money, String currency, String hashId) {
         this.orderCode = orderCode;
         this.orderType = orderType;
         this.coinName = coinName;
+        this.protocolName = protocolName;
         this.address = address;
-        this.amount = amount;
+        this.amountPaid = amountPaid;
         this.result = result;
         this.price = price;
         this.money = money;
@@ -130,8 +142,9 @@ public class UserWithdrawCallBackResponse {
                 "orderCode='" + orderCode + '\'' +
                 ", orderType='" + orderType + '\'' +
                 ", coinName='" + coinName + '\'' +
+                ", protocolName='" + protocolName + '\'' +
                 ", address='" + address + '\'' +
-                ", amount='" + amount + '\'' +
+                ", amountPaid='" + amountPaid + '\'' +
                 ", result=" + result +
                 ", price='" + price + '\'' +
                 ", money='" + money + '\'' +

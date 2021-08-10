@@ -489,7 +489,7 @@ public class PaymentInfo {
             Integer paymentStatus = jsonObject.getInt("paymentStatus");
             boolean result = jsonObject.getBoolean("result");
             String money = jsonObject.getString("money");
-            PaymentCallBackResponse resultResponse = new PaymentCallBackResponse(orderCode,coinName,address,amount,protocolName,paymentStatus,result,price,money);
+            PaymentCallBackResponse resultResponse = new PaymentCallBackResponse(type,orderCode,coinName,address,amount,protocolName,paymentStatus,result,price,money);
             listener.onFinish(resultResponse);
         }else if (type.equals("withdraw")) { /// 用户提币
             if (!isRight) { // 验签失败
@@ -498,15 +498,15 @@ public class PaymentInfo {
             }
             String orderCode = jsonObject.getString("orderCode");
             String coinName = jsonObject.getString("coinName");
+            String protocolName = jsonObject.getString("protocolName");
             String address = jsonObject.getString("address");
             String currency = jsonObject.getString("currency");
             String money = jsonObject.getString("money");
             String price = jsonObject.getString("price");
-
-            String amount = jsonObject.getString("amount");
+            String amount = jsonObject.getString("amountPaid");
             String hashId = jsonObject.getString("hashId");
             boolean result = jsonObject.getBoolean("result");
-            UserWithdrawCallBackResponse userWithdrawCallBackResponse =  new UserWithdrawCallBackResponse(orderCode,type,coinName,address,amount,result,price,money,currency,hashId);
+            UserWithdrawCallBackResponse userWithdrawCallBackResponse =  new UserWithdrawCallBackResponse(orderCode,type,coinName,protocolName,address,amount,result,price,money,currency,hashId);
 
             withdrawCalllBack.onFinish(userWithdrawCallBackResponse);
         }

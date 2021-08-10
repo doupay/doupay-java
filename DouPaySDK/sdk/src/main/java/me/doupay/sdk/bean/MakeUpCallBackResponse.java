@@ -4,7 +4,7 @@ public class MakeUpCallBackResponse {
     /// 订单编号
     private String orderCode;
     /// 订单类型
-    private String orderType = "makeUp";
+    private String orderType;
     /// 协议名称
     private String coinName;
     /// 协议名称
@@ -19,7 +19,7 @@ public class MakeUpCallBackResponse {
     private String money;
     /// 结果 true成功 false失败
     private boolean result;
-    /// 支付状态 0未付款 1正常付款 2多付 3少付
+    /// 支付状态 1正常付款 2少付 3多付
     private Integer paymentStatus;
 
     public String getOrderCode() {
