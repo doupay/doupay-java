@@ -20,11 +20,11 @@
   <dependency>
 	  <groupId>com.github.doupay</groupId>
 	  <artifactId>doupay-java</artifactId>
-	  <version>1.0.16</version>
+	  <version>1.0.18</version>
    </dependency>
 ```
 #### 示例截图如下:
-图中示例版本号"0.0.1"会随时变化,请随时关注本github更新,现在最新的版本号为1.0.16
+图中示例版本号"0.0.1"会随时变化,请随时关注本github更新,现在最新的版本号为1.0.18
 
 <img width="864" alt="步骤" src="https://user-images.githubusercontent.com/86946898/124468680-feed5b80-ddcb-11eb-927f-c10855eeaf86.png">
 
@@ -42,7 +42,7 @@ Constants.setLanguage(Language.en_US);/// 英文
 
 ## sdk中各方法请求和响应参数,请参照[wiki](https://github.com/doupay/doupay-java/wiki)
 
-## 2.jar包引入
+<!-- ## 2.jar包引入
    ### 1.1 把jar包拖入项目,如下图所示:jar包在文件中即DouPaySdk.jar,也可以自己用源代码打包
    
    <img width="1488" alt="1111" src="https://user-images.githubusercontent.com/86946898/127596834-639f94c0-e775-4911-9433-f976589852ee.png">
@@ -69,3 +69,4 @@ Constants.setLanguage(Language.en_US);/// 英文
 
 ## sdk中各方法请求和响应参数,请参照[wiki](https://github.com/doupay/doupay-java/wiki)
 
+ -->
