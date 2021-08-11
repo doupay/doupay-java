@@ -45,8 +45,8 @@ public class SDKtest {
                 "QYbWcXx9Zv1w2ezKZE8EFG8=";
         String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhl7C2UAO1DZYOYLK+6IN5zez+WOFpGiAeGjToLXVkPtVKY0iKR+sZIXvx1FdszQOaIDkPlHgbisi5HYoWayQ8Hj2+NylQ1pBz+xek/fl9DKpIb3jKrlZBI4jnkNNQTx2guGVM9BbnQBE52OMf4hB3OfCFpPDyuc5tEE10rZtYRNYbdGeR4xgm0esZYyS6CfwZ275mbcTxnHsa09xghsL5qQi+bwDvSOp9SKiCx4p79rtxhgQrBVCCFxP39E/RhSSeCh9iWwCL6kMEQYNEJHGWWCV1WDnJHIjjwIzoN/vSKXxFdjw1tigq8owNd0v3cffMOnYBLNiYtsFhswGB0t9CQIDAQAB";
         Constants.openSysLog = true;
-        Constants.getInstance().init(secret,privateKey,publicKey,appId,"3600");
-//        Constants.setBasrUrl("http://192.168.11.113:9000/");
+        Constants.getInstance().init(secret,privateKey,publicKey,appId,"7200");
+        Constants.setBasrUrl("http://192.168.11.113:9000/");
         Constants.setLanguage(Language.zh_CH);
     }
 

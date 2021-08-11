@@ -11,6 +11,7 @@ import me.doupay.sdk.sign.RSAUtils;
 import org.json.JSONObject;
 import retrofit2.Call;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -133,6 +134,14 @@ public class PaymentInfo {
         if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
+        // 大于1800小于7200
+        if (new BigDecimal(Constants.getExpireTime()).compareTo(new BigDecimal("1800")) == -1) {
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError8));
+        }
+        if (new BigDecimal(Constants.getExpireTime()).compareTo(new BigDecimal("7200")) == 1) {
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError8));
+        }
+
         if ( orderNo == null || orderType == null
                 || subject == null ||  orderNo.isEmpty()  || subject.isEmpty()
             ) {
