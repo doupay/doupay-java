@@ -49,7 +49,7 @@ public class Constants {
     private static String secret = "";
     private static String privateKey = "";
     private static String appId = "";
-    private static String expireTime = "";
+    private static String expireTime = "1800";
     private static String publicKey = "";
 
     public static String getSecret() {
