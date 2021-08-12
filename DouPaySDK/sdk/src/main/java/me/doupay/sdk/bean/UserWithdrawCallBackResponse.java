@@ -122,7 +122,7 @@ public class UserWithdrawCallBackResponse {
         this.protocolName = protocolName;
     }
 
-    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinName,String protocolName	, String address, String amountPaid, Boolean result, String price, String money, String currency, String hashId) {
+    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinName,String protocolName, String address, String amountPaid, Boolean result, String price, String money, String currency, String hashId) {
         this.orderCode = orderCode;
         this.orderType = orderType;
         this.coinName = coinName;
@@ -135,6 +135,7 @@ public class UserWithdrawCallBackResponse {
         this.currency = currency;
         this.hashId = hashId;
     }
+
 
     @Override
     public String toString() {
