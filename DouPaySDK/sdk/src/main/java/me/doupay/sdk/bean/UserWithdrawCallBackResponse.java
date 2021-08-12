@@ -20,7 +20,7 @@ public class UserWithdrawCallBackResponse {
     private String amountPaid;
 
     /// 结果
-    private boolean result;
+    private Boolean result;
 
     ///单价
     private String price;
@@ -74,11 +74,11 @@ public class UserWithdrawCallBackResponse {
         this.amountPaid = amountPaid;
     }
 
-    public boolean getResult() {
+    public Boolean getResult() {
         return result;
     }
 
-    public void setResult(boolean result) {
+    public void setResult(Boolean result) {
         this.result = result;
     }
 
@@ -122,7 +122,7 @@ public class UserWithdrawCallBackResponse {
         this.protocolName = protocolName;
     }
 
-    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinName,String protocolName	, String address, String amountPaid, boolean result, String price, String money, String currency, String hashId) {
+    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinName,String protocolName	, String address, String amountPaid, Boolean result, String price, String money, String currency, String hashId) {
         this.orderCode = orderCode;
         this.orderType = orderType;
         this.coinName = coinName;

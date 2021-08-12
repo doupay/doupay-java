@@ -35,7 +35,7 @@ public class PaymentCallBackResponse {
     /**
      *结果 true成功 false失败
      */
-    private boolean result;
+    private Boolean result;
 
     /**
      *汇率
@@ -46,7 +46,7 @@ public class PaymentCallBackResponse {
      */
     private String money;
 
-    public PaymentCallBackResponse(String orderType,String orderCode, String coinName, String address, String amountPaid, String protocolName, Integer paymentStatus, boolean result, String price,String money) {
+    public PaymentCallBackResponse(String orderType,String orderCode, String coinName, String address, String amountPaid, String protocolName, Integer paymentStatus, Boolean result, String price,String money) {
         this.orderType = orderType;
         this.orderCode = orderCode;
         this.coinName = coinName;
@@ -107,11 +107,11 @@ public class PaymentCallBackResponse {
         this.paymentStatus = paymentStatus;
     }
 
-    public boolean isResult() {
+    public Boolean getResult() {
         return result;
     }
 
-    public void setResult(boolean result) {
+    public void setResult(Boolean result) {
         this.result = result;
     }
 

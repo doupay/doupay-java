@@ -18,7 +18,7 @@ public class MakeUpCallBackResponse {
     /// 金额
     private String money;
     /// 结果 true成功 false失败
-    private boolean result;
+    private Boolean result;
     /// 支付状态 1正常付款 2少付 3多付
     private Integer paymentStatus;
 
@@ -78,11 +78,11 @@ public class MakeUpCallBackResponse {
         this.amountPaid = amountPaid;
     }
 
-    public boolean isResult() {
+    public Boolean getResult() {
         return result;
     }
 
-    public void setResult(boolean result) {
+    public void setResult(Boolean result) {
         this.result = result;
     }
 
@@ -102,7 +102,7 @@ public class MakeUpCallBackResponse {
         this.money = money;
     }
 
-    public MakeUpCallBackResponse(String orderCode, String orderType, String coinName, String protocolName, String price, String address, String amountPaid, boolean result, Integer paymentStatus,String money) {
+    public MakeUpCallBackResponse(String orderCode, String orderType, String coinName, String protocolName, String price, String address, String amountPaid, Boolean result, Integer paymentStatus,String money) {
         this.orderCode = orderCode;
         this.orderType = orderType;
         this.coinName = coinName;

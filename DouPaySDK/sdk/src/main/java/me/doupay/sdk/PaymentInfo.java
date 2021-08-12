@@ -496,7 +496,7 @@ public class PaymentInfo {
             String protocolName = jsonObject.getString("protocolName");
             String price = jsonObject.getString("price");
             Integer paymentStatus = jsonObject.getInt("paymentStatus");
-            boolean result = jsonObject.getBoolean("result");
+            Boolean result = jsonObject.getBoolean("result");
             String money = jsonObject.getString("money");
             PaymentCallBackResponse resultResponse = new PaymentCallBackResponse(type,orderCode,coinName,address,amount,protocolName,paymentStatus,result,price,money);
             listener.onFinish(resultResponse);
@@ -514,7 +514,7 @@ public class PaymentInfo {
             String price = jsonObject.getString("price");
             String amount = jsonObject.getString("amountPaid");
             String hashId = jsonObject.getString("hashId");
-            boolean result = jsonObject.getBoolean("result");
+            Boolean result = jsonObject.getBoolean("result");
             UserWithdrawCallBackResponse userWithdrawCallBackResponse =  new UserWithdrawCallBackResponse(orderCode,type,coinName,protocolName,address,amount,result,price,money,currency,hashId);
 
             withdrawCalllBack.onFinish(userWithdrawCallBackResponse);
@@ -532,7 +532,7 @@ public class PaymentInfo {
             String money = jsonObject.getString("money");
             String amountPaid = jsonObject.getString("amountPaid");
             Integer paymentStatus = jsonObject.getInt("paymentStatus");
-            boolean result = jsonObject.getBoolean("result");
+            Boolean result = jsonObject.getBoolean("result");
             MakeUpCallBackResponse make = new MakeUpCallBackResponse(orderCode,type,coinName,protocolName,price,address,amountPaid,result,paymentStatus,money);
             makeUpCallBackResponseCallBack.onFinish(make);
         }
