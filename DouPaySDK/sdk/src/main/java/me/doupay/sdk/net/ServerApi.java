@@ -23,7 +23,14 @@ public interface ServerApi {
      * */
     @FormUrlEncoded
     @POST()
-    Call<BaseVo<CurrencyResponseData>> getCurrencyList(@Url String url, @FieldMap Map<String, Object> body);
+    Call<BaseVo<CurrencyResponseData>> getCurrencyList(@Url String url, @FieldMap Map<String, Object> body); //
+
+    /*
+     * 获取币种链名称
+     * */
+    @FormUrlEncoded
+    @POST()
+    Call<BaseVo<CoinChainCodeResp>> getCoinChainCodes(@Url String url, @FieldMap Map<String, Object> body);
 
     @FormUrlEncoded
     @POST()

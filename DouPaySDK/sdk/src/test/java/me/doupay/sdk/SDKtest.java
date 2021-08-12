@@ -80,7 +80,7 @@ public class SDKtest {
         initAllParameters();
         String orderNo = "SJDD" + String.valueOf(System.currentTimeMillis());
 
-        BaseVo<PayResponseData> baseVo = PaymentInfo.pay("","10", CoinNameEnum.USDT, CurrencyCodeEnum.CNY, "17788888888", orderNo,
+        BaseVo<PayResponseData> baseVo = PaymentInfo.pay("","10", CoinNameEnum.BTC, CurrencyCodeEnum.USD, "17788888888", orderNo,
                 "我要买买买", "", "", OrderTypeCodeEnum.BY_AMOUNT);
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
@@ -104,7 +104,7 @@ public class SDKtest {
     @Test
     public void getOrderInfo() {
         initAllParameters();
-        BaseVo<OrderInfoResponseData> baseVo = PaymentInfo.getOrderInfo("ZF202108120554588703740568");
+        BaseVo<OrderInfoResponseData> baseVo = PaymentInfo.getOrderInfo("ZF202108120801011894540370");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
@@ -148,10 +148,22 @@ public class SDKtest {
     }
 
     @Test
+    public void getCoinChainCodes() {
+        initAllParameters();
+
+        BaseVo<CoinChainCodeResp> baseVo = PaymentInfo.getCoinChainCodes(CoinNameEnum.USDT);
+        if (baseVo.getCode() == 200) {
+            System.out.println("-------------------------" + baseVo.getData().toString());
+        }else {
+            System.out.println(baseVo.getCode() + "-------------------------" + baseVo.getMsg());
+        }
+    }
+
+    @Test
     public void withdraw() {
         initAllParameters();
         String orderNo = "SHYH" + String.valueOf(System.currentTimeMillis());
-        BaseVo<WithdrawResponse> baseVo = PaymentInfo.withdraw("TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "4", CoinNameEnum.USDT, orderNo, orderNo,"500",OrderTypeCodeEnum.BY_AMOUNT,CurrencyCodeEnum.CNY);
+        BaseVo<WithdrawResponse> baseVo = PaymentInfo.withdraw("ERC20","0x5e725D789ab3552c6D0f60ee0057b5626629D4C5", "5", CoinNameEnum.USDT, orderNo, orderNo,"500",OrderTypeCodeEnum.BY_AMOUNT,CurrencyCodeEnum.CNY);
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {

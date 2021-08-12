@@ -23,7 +23,7 @@ public class PaymentInfo {
      * 获取币种列表
      */
     public static BaseVo<CoinResponseData>  getCoinList () {
-        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+        if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999, ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
         Map<String,Object> map = new HashMap<>();
@@ -41,7 +41,7 @@ public class PaymentInfo {
      * 获取法币列表
      */
     public static BaseVo<CurrencyResponseData> getCurrencyList() {
-        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+        if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
 
         }
@@ -57,11 +57,32 @@ public class PaymentInfo {
     }
 
     /**
+     *
+     * @return
+     */
+    public static BaseVo<CoinChainCodeResp> getCoinChainCodes(CoinNameEnum coinName) {
+        if (!Constants.getInstance().isInitAllParameters()) {
+            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
+
+        }
+        Map<String,Object> map = new HashMap<>();
+        map.put("appId",Constants.getAppId());
+        map.put("coinName",coinName);
+        Call<BaseVo<CoinChainCodeResp>> currentList =  ServerApi.SERVICE_API.getCoinChainCodes(Constants.basrUrl + "trade/getChainCoins",map);
+        try {
+            BaseVo<CoinChainCodeResp> body = currentList.execute().body();
+            return body;
+        }catch (Exception e) {
+            return new BaseVo<>(9999,e.getMessage());
+        }
+    }
+
+    /**
      * 获取订单信息
      * @param orderCode 订单号【长度20到50】
      */
     public  static   BaseVo<OrderInfoResponseData> getOrderInfo(String orderCode) {
-        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+        if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
 
@@ -91,7 +112,7 @@ public class PaymentInfo {
      * @param orderCode 订单号【长度10到30】
      */
     public static  BaseVo<PaymentInfoResponseData> getPaymentInfo (CoinNameEnum coinName,String chainCoinCode, String orderCode) {
-        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+        if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
 
@@ -203,7 +224,7 @@ public class PaymentInfo {
      * @return
      */
     public static BaseVo<MakeUpResponse> maleUp(String remark, String orderCode) {
-        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+        if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
 
         }
@@ -231,7 +252,7 @@ public class PaymentInfo {
      * @return
      */
     public static BaseVo<PaymentCallBackResponse> getCallback(String orderCode) {
-        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+        if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
 
         }
@@ -255,7 +276,7 @@ public class PaymentInfo {
          * @param orderCode 订单号
          */
     public static BaseVo<PayResponseData> cancleOrder (String orderCode) {
-        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+        if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
 
         }
@@ -282,7 +303,7 @@ public class PaymentInfo {
      * @param remark   退款描述【长度5到50】
      */
     public  static BaseVo<RefundResponseData> refund(RefundType refundType, String address, String amount, String orderCode, String remark) {
-        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+        if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
 
         }
@@ -318,7 +339,7 @@ public class PaymentInfo {
      * @param orderCode     订单编号【长度20到50】
      */
     public  static BaseVo<RefundInfoResponseData> getRefunds(String orderCode) {
-        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+        if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
 
@@ -346,11 +367,11 @@ public class PaymentInfo {
      * @param merchantUser     	   商家用户【长度10到20之间】
      * @param orderNo              订单号【长度10到30】
      */
-    public  static BaseVo<WithdrawResponse> withdraw(String address,String amount,CoinNameEnum coinName,String merchantUser,String orderNo,String money,OrderTypeCodeEnum orderType,CurrencyCodeEnum currencyCode ) {
-        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+    public  static BaseVo<WithdrawResponse> withdraw(String protocolName,String address,String amount,CoinNameEnum coinName,String merchantUser,String orderNo,String money,OrderTypeCodeEnum orderType,CurrencyCodeEnum currencyCode ) {
+        if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
-        if (address == null  || coinName == null || merchantUser == null || orderNo == null) {
+        if (address == null  || coinName == null || merchantUser == null || orderNo == null || protocolName == null) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
         Map<String,Object> map = new HashMap<>();
@@ -378,6 +399,7 @@ public class PaymentInfo {
 //        map.put("secretSign",secertSign);
         map.put("timeStamp",timestamp);
         map.put("orderType",orderType);
+        map.put("protocolName",protocolName);
         Call<BaseVo<WithdrawResponse>> baseVoCall =   ServerApi.SERVICE_API.withdraw(Constants.basrUrl + "trade/withdrawal",map);
         try {
             BaseVo<WithdrawResponse> body = baseVoCall.execute().body();
@@ -394,7 +416,7 @@ public class PaymentInfo {
      * @return
      */
     public  static BaseVo<CoinPriceResponse> getCoinPrice(CoinNameEnum coinName,CurrencyCodeEnum currencyCode) {
-        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+        if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999, ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
         if (coinName == null || currencyCode == null ) {
@@ -422,7 +444,7 @@ public class PaymentInfo {
      * @param pageNo 页数
      */
     public  static BaseVo<BillRecord> getBillRecords( LocalDateTime startTime,LocalDateTime endTime,Integer pageSize,Integer pageNo) {
-        if (Constants.getSecret().isEmpty() || Constants.getPrivateKey().isEmpty()) {
+        if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
         Map<String,Object> map = new HashMap<>();
@@ -451,7 +473,7 @@ public class PaymentInfo {
      * @param listener 回调结果
      */
     public  static void verifySignAndGetResult (String headerSignString,String bodyString,CallBackListener<PaymentCallBackResponse> listener,CallBackListener<UserWithdrawCallBackResponse> withdrawCalllBack,CallBackListener<MakeUpCallBackResponse> makeUpCallBackResponseCallBack) {
-        if (Constants.getSecret().isEmpty() || Constants.getPublicKey().isEmpty()) {
+        if (!Constants.getInstance().isInitAllParameters()) {
             if (listener != null) {
                 listener.onError(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
             }
