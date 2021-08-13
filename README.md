@@ -20,11 +20,11 @@
   <dependency>
 	  <groupId>com.github.doupay</groupId>
 	  <artifactId>doupay-java</artifactId>
-	  <version>1.0.18</version>
+	  <version>1.0.22</version>
    </dependency>
 ```
 #### 示例截图如下:
-图中示例版本号"0.0.1"会随时变化,请随时关注本github更新,现在最新的版本号为1.0.18
+图中示例版本号"0.0.1"会随时变化,请随时关注本github更新,现在最新的版本号为1.0.22
 
 <img width="864" alt="步骤" src="https://user-images.githubusercontent.com/86946898/124468680-feed5b80-ddcb-11eb-927f-c10855eeaf86.png">
 
@@ -32,7 +32,7 @@
 
 ![111](https://user-images.githubusercontent.com/86946898/128279082-9869ff2e-e370-4cb4-b5f9-944f4a33389c.png)
 
-### 以下方法可以设置语言类别,在版本1.0.14以后支持
+### 以下方法可以设置语言类别
 
 ```java
 Constants.setLanguage(Language.zh_CH);/// 中文
