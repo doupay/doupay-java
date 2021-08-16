@@ -45,9 +45,9 @@ public class SDKtest {
                 "QYbWcXx9Zv1w2ezKZE8EFG8=";
         String publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhl7C2UAO1DZYOYLK+6IN5zez+WOFpGiAeGjToLXVkPtVKY0iKR+sZIXvx1FdszQOaIDkPlHgbisi5HYoWayQ8Hj2+NylQ1pBz+xek/fl9DKpIb3jKrlZBI4jnkNNQTx2guGVM9BbnQBE52OMf4hB3OfCFpPDyuc5tEE10rZtYRNYbdGeR4xgm0esZYyS6CfwZ275mbcTxnHsa09xghsL5qQi+bwDvSOp9SKiCx4p79rtxhgQrBVCCFxP39E/RhSSeCh9iWwCL6kMEQYNEJHGWWCV1WDnJHIjjwIzoN/vSKXxFdjw1tigq8owNd0v3cffMOnYBLNiYtsFhswGB0t9CQIDAQAB";
         Constants.openSysLog = true;
-        Constants.getInstance().init(secret,privateKey,publicKey,appId,"7200");
         Constants.setBasrUrl("http://192.168.11.113:9000/");
-        Constants.setLanguage(Language.zh_CH);
+        Constants.getInstance().init(secret,privateKey,publicKey,appId,"3600");
+        Constants.setLanguage(Language.zh_TW);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class SDKtest {
         initAllParameters();
         String orderNo = "SJDD" + String.valueOf(System.currentTimeMillis());
 
-        BaseVo<PayResponseData> baseVo = PaymentInfo.pay("","10", CoinNameEnum.BTC, CurrencyCodeEnum.USD, "17788888888", orderNo,
+        BaseVo<PayResponseData> baseVo = PaymentInfo.pay("","10", CoinNameEnum.USDT, CurrencyCodeEnum.USD, "17788888888", orderNo,
                 "我要买买买", "", "", OrderTypeCodeEnum.BY_AMOUNT);
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
@@ -93,7 +93,7 @@ public class SDKtest {
     public void cancle() {
         initAllParameters();
 
-        BaseVo<PayResponseData> baseVo =  PaymentInfo.cancleOrder("ZF2021072611592641684287991");
+        BaseVo<PayResponseData> baseVo =  PaymentInfo.cancleOrder("ZF202108131023134048733642");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
@@ -104,7 +104,7 @@ public class SDKtest {
     @Test
     public void getOrderInfo() {
         initAllParameters();
-        BaseVo<OrderInfoResponseData> baseVo = PaymentInfo.getOrderInfo("ZF202108120801011894540370");
+        BaseVo<OrderInfoResponseData> baseVo = PaymentInfo.getOrderInfo("ZF202108130838338493182222");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
@@ -116,7 +116,7 @@ public class SDKtest {
     public void getPaymentInfo() {
         initAllParameters();
 
-        BaseVo<PaymentInfoResponseData> baseVo =  PaymentInfo.getPaymentInfo(CoinNameEnum.USDT,"0004" ,"ZF202107280739365664124421");
+        BaseVo<PaymentInfoResponseData> baseVo =  PaymentInfo.getPaymentInfo(CoinNameEnum.USDT,"0004" ,"ZF202108130826005085856666");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
@@ -127,7 +127,7 @@ public class SDKtest {
     @Test
     public void getRefund() {
         initAllParameters();
-        BaseVo<RefundResponseData> baseVo = PaymentInfo.refund(RefundType.NEW_ADDRESS,"TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "15.8", "ZF202107291547355277965323", "退1个,啦啦啦");
+        BaseVo<RefundResponseData> baseVo = PaymentInfo.refund(RefundType.NEW_ADDRESS,"TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "15.8", "ZF202108130826005085856666", "退1个,啦啦啦");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
@@ -174,7 +174,7 @@ public class SDKtest {
     @Test
     public void makeup() {
         initAllParameters();
-        BaseVo<MakeUpResponse> baseVo = PaymentInfo.maleUp("需要补单","ZF202107281302375977458662");
+        BaseVo<MakeUpResponse> baseVo = PaymentInfo.maleUp("需要补单","ZF202108130838338493182222");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {

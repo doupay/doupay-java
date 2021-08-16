@@ -21,7 +21,7 @@ enum class ApiString(var us: String,
         fun getString(str: ApiString): String {
             return when (Constants.language) {
                 Language.en_US -> str.us
-                Language.zh_CH -> str.cn
+                Language.zh_CN -> str.cn
                 else -> str.us
             }
         }

@@ -520,7 +520,8 @@ public class PaymentInfo {
             Integer paymentStatus = jsonObject.getInt("paymentStatus");
             Boolean result = jsonObject.getBoolean("result");
             String money = jsonObject.getString("money");
-            PaymentCallBackResponse resultResponse = new PaymentCallBackResponse(type,orderCode,coinName,address,amount,protocolName,paymentStatus,result,price,money);
+            String orderNo = jsonObject.getString("orderNo");
+            PaymentCallBackResponse resultResponse = new PaymentCallBackResponse(type,orderCode,coinName,address,amount,protocolName,paymentStatus,result,price,money,orderNo);
             listener.onFinish(resultResponse);
         }else if (type.equals("withdraw")) { /// 用户提币
             if (!isRight) { // 验签失败
@@ -537,7 +538,8 @@ public class PaymentInfo {
             String amount = jsonObject.getString("amountPaid");
             String hashId = jsonObject.getString("hashId");
             Boolean result = jsonObject.getBoolean("result");
-            UserWithdrawCallBackResponse userWithdrawCallBackResponse =  new UserWithdrawCallBackResponse(orderCode,type,coinName,protocolName,address,amount,result,price,money,currency,hashId);
+            String orderNo = jsonObject.getString("orderNo");
+            UserWithdrawCallBackResponse userWithdrawCallBackResponse =  new UserWithdrawCallBackResponse(orderCode,type,coinName,protocolName,address,amount,result,price,money,currency,hashId,orderNo);
 
             withdrawCalllBack.onFinish(userWithdrawCallBackResponse);
         }
@@ -555,7 +557,8 @@ public class PaymentInfo {
             String amountPaid = jsonObject.getString("amountPaid");
             Integer paymentStatus = jsonObject.getInt("paymentStatus");
             Boolean result = jsonObject.getBoolean("result");
-            MakeUpCallBackResponse make = new MakeUpCallBackResponse(orderCode,type,coinName,protocolName,price,address,amountPaid,result,paymentStatus,money);
+            String orderNo = jsonObject.getString("orderNo");
+            MakeUpCallBackResponse make = new MakeUpCallBackResponse(orderCode,type,coinName,protocolName,price,address,amountPaid,result,paymentStatus,money,orderNo);
             makeUpCallBackResponseCallBack.onFinish(make);
         }
     }

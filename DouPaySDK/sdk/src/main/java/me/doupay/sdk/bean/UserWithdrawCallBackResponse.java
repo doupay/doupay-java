@@ -34,6 +34,9 @@ public class UserWithdrawCallBackResponse {
     /// 交易哈希
     private String hashId;
 
+    /// 商家订单号
+    private String orderNo;
+
     public String getOrderCode() {
         return orderCode;
     }
@@ -122,7 +125,15 @@ public class UserWithdrawCallBackResponse {
         this.protocolName = protocolName;
     }
 
-    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinName,String protocolName, String address, String amountPaid, Boolean result, String price, String money, String currency, String hashId) {
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public UserWithdrawCallBackResponse(String orderCode, String orderType, String coinName, String protocolName, String address, String amountPaid, Boolean result, String price, String money, String currency, String hashId, String orderNo) {
         this.orderCode = orderCode;
         this.orderType = orderType;
         this.coinName = coinName;
@@ -134,6 +145,7 @@ public class UserWithdrawCallBackResponse {
         this.money = money;
         this.currency = currency;
         this.hashId = hashId;
+        this.orderNo = orderNo;
     }
 
 
@@ -151,6 +163,7 @@ public class UserWithdrawCallBackResponse {
                 ", money='" + money + '\'' +
                 ", currency='" + currency + '\'' +
                 ", hashId='" + hashId + '\'' +
+                ", orderNo='" + orderNo + '\'' +
                 '}';
     }
 }

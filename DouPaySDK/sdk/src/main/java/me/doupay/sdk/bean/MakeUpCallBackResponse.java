@@ -22,6 +22,9 @@ public class MakeUpCallBackResponse {
     /// 支付状态 1正常付款 2少付 3多付
     private Integer paymentStatus;
 
+    /// 商家订单号
+    private String orderNo;
+
     public String getOrderCode() {
         return orderCode;
     }
@@ -102,7 +105,15 @@ public class MakeUpCallBackResponse {
         this.money = money;
     }
 
-    public MakeUpCallBackResponse(String orderCode, String orderType, String coinName, String protocolName, String price, String address, String amountPaid, Boolean result, Integer paymentStatus,String money) {
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public MakeUpCallBackResponse(String orderCode, String orderType, String coinName, String protocolName, String price, String address, String amountPaid, Boolean result, Integer paymentStatus, String money, String orderNo) {
         this.orderCode = orderCode;
         this.orderType = orderType;
         this.coinName = coinName;
@@ -113,6 +124,7 @@ public class MakeUpCallBackResponse {
         this.result = result;
         this.paymentStatus = paymentStatus;
         this.money = money;
+        this.orderNo = orderNo;
     }
 
     @Override
@@ -128,6 +140,7 @@ public class MakeUpCallBackResponse {
                 ", money='" + money + '\'' +
                 ", result=" + result +
                 ", paymentStatus=" + paymentStatus +
+                ", orderNo='" + orderNo + '\'' +
                 '}';
     }
 }

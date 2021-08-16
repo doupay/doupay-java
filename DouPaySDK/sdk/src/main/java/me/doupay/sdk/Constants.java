@@ -6,7 +6,7 @@ public class Constants {
     private static Constants constants;
     public static boolean openSysLog = false;
     public static  String basrUrl = "http://pay.apipay.one/";
-    public static Language language = Language.zh_CH;
+    public static Language language = Language.zh_CN;
 
     public static Constants getInstance() {
         if (constants == null) {

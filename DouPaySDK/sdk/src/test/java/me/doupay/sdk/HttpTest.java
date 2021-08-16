@@ -49,7 +49,7 @@ public class HttpTest {
         Constants.openSysLog = true;
         Constants.getInstance().init(secret,privateKey,publicKey,appId,"3600");
         Constants.setBasrUrl("http://192.168.11.113:9000/");
-        Constants.setLanguage(Language.zh_CH);
+        Constants.setLanguage(Language.en_US);
     }
 
     @Test
@@ -92,17 +92,17 @@ public class HttpTest {
 
         Map<String,Object> map = new HashMap<>();
         map.put("appId",Constants.getAppId());
-        map.put("expireTime",Constants.getExpireTime());
-        map.put("merchantUser","123123");
+//        map.put("expireTime",Constants.getExpireTime());
+//        map.put("merchantUser","123123");
         map.put("orderNo",orderNo);
-        map.put("orderType","BY_AMOUNT");
-        map.put("subject","1231122");
-        map.put("body","3234");
-        map.put("description","zzzzzz");
+        map.put("orderType","BY_MONEY");
+        map.put("subject","买买买买迈阿密");
+////        map.put("body","3234");
+//        map.put("description","我要买买买买买买啊啊啊啊");
         map.put("money","100");
         map.put("currency","cny");
-        map.put("amount","100");
-        map.put("coinName","USDT");
+//        map.put("amount","100");
+//        map.put("coinName","USDT");
 
         Call<BaseVo<PayResponseData>> gotoPay =  ServerApi.SERVICE_API.gotoPay(Constants.basrUrl + "trade/pay",map);
         try {
@@ -122,8 +122,8 @@ public class HttpTest {
         initAllParameters();
 
         Map<String,Object> map = new HashMap<>();
-        map.put("orderCode","");
-        map.put("test","test");
+        map.put("orderCode","ZF202108131359385329626349");
+//        map.put("test","test");
 
         Call<BaseVo<PayResponseData>> baseVoCall =  ServerApi.SERVICE_API.cancleOrder(Constants.basrUrl + "trade/cancel",map);
         try {
@@ -183,16 +183,14 @@ public class HttpTest {
         initAllParameters();
         String appId = Constants.getAppId();
         String timestamp = System.currentTimeMillis() + "";
-        String secertSign = AES.Encrypt(appId + timestamp,Constants.getSecret());
         Map<String,Object> map = new HashMap<>();
-        map.put("refundType","");
-        map.put("remark","");
-        map.put("amount","");
+        map.put("refundType","OLD_ADDRESS");
+        map.put("remark","1212");
+        map.put("amount","111");
         map.put("appId",appId);
-        map.put("orderCode","");
-        map.put("secretSign",secertSign);
+        map.put("orderCode","ZF202108131359385329626349");
         map.put("timeStamp",timestamp);
-        map.put("address","");
+//        map.put("address","111");
 
         Call<BaseVo<RefundResponseData>> baseVoCall =  ServerApi.SERVICE_API.gotoRefund(Constants.basrUrl + "trade/refund",map);
         try {
@@ -232,17 +230,18 @@ public class HttpTest {
         initAllParameters();
         Map<String,Object> map = new HashMap<>();
 
-        map.put("amount","");
-        map.put("money","");
-        map.put("currency","");
+//        map.put("amount","11");
+        map.put("money","100");
+//        map.put("currency","");
         String appId = Constants.getAppId();
-        map.put("address","");
+        map.put("address","TEQrvHyU54YibVHMGb7475n8y3mXBofaaR");
         map.put("appId",appId);
-        map.put("coinName","");
-        map.put("merchantUser","");
-        map.put("orderNo","");
-        map.put("timeStamp","");
-        map.put("orderType","");
+        map.put("coinName","USDT");
+        map.put("merchantUser","1");
+        map.put("orderNo","ZF20210813135938532962634911");
+        map.put("timeStamp",""+System.currentTimeMillis());
+        map.put("orderType","BY_MONEY");
+        map.put("protocolName","TRC20");
         Call<BaseVo<WithdrawResponse>> baseVoCall =   ServerApi.SERVICE_API.withdraw(Constants.basrUrl + "trade/withdrawal",map);
         try {
             BaseVo<WithdrawResponse> body = baseVoCall.execute().body();
@@ -260,9 +259,9 @@ public class HttpTest {
     public void makeup() {
         initAllParameters();
         Map<String,Object> map = new HashMap<>();
-        map.put("orderCode","");
+        map.put("orderCode","ZF202108131359385329626349");
         map.put("appId",Constants.getAppId());
-        map.put("remark","");
+        map.put("remark","aaaaaa");
         map.put("timeStamp",System.currentTimeMillis());
         Call<BaseVo<MakeUpResponse>> baseVoCall =  ServerApi.SERVICE_API.makeup(Constants.basrUrl + "trade/makeUpOrder",map);
         try {
@@ -283,8 +282,8 @@ public class HttpTest {
     public void getPrice() {
         initAllParameters();
         Map<String,Object> map = new HashMap<>();
-        map.put("coinName","");
-        map.put("currency","");
+        map.put("coinName","USDT");
+        map.put("currency","qqq");
 
         Call<BaseVo<CoinPriceResponse>> baseVoCall =   ServerApi.SERVICE_API.getPrice(Constants.basrUrl + "trade/getCurrencyCoinPrice",map);
         try {

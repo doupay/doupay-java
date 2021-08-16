@@ -46,7 +46,13 @@ public class PaymentCallBackResponse {
      */
     private String money;
 
-    public PaymentCallBackResponse(String orderType,String orderCode, String coinName, String address, String amountPaid, String protocolName, Integer paymentStatus, Boolean result, String price,String money) {
+
+    /**
+     *商家订单号
+     */
+    private String orderNo;
+
+    public PaymentCallBackResponse(String orderType,String orderCode, String coinName, String address, String amountPaid, String protocolName, Integer paymentStatus, Boolean result, String price,String money,String orderNo) {
         this.orderType = orderType;
         this.orderCode = orderCode;
         this.coinName = coinName;
@@ -57,6 +63,7 @@ public class PaymentCallBackResponse {
         this.result = result;
         this.price = price;
         this.money = money;
+        this.orderNo = orderNo;
     }
 
     public String getOrderCode() {
@@ -139,6 +146,14 @@ public class PaymentCallBackResponse {
         this.orderType = orderType;
     }
 
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
     @Override
     public String toString() {
         return "PaymentCallBackResponse{" +
@@ -152,6 +167,7 @@ public class PaymentCallBackResponse {
                 ", result=" + result +
                 ", price='" + price + '\'' +
                 ", money='" + money + '\'' +
+                ", orderNo='" + orderNo + '\'' +
                 '}';
     }
 }
