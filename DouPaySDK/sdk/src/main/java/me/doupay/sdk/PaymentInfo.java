@@ -367,11 +367,11 @@ public class PaymentInfo {
      * @param merchantUser     	   商家用户【长度10到20之间】
      * @param orderNo              订单号【长度10到30】
      */
-    public  static BaseVo<WithdrawResponse> withdraw(String protocolName,String address,String amount,CoinNameEnum coinName,String merchantUser,String orderNo,String money,OrderTypeCodeEnum orderType,CurrencyCodeEnum currencyCode ) {
+    public  static BaseVo<WithdrawResponse> withdraw(String protocolName,String address,String amount,CoinNameEnum coinName,String merchantUser,String orderNo,String money,OrderTypeCodeEnum orderType,CurrencyCodeEnum currencyCode,String feeAmount) {
         if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
-        if (address == null  || coinName == null || merchantUser == null || orderNo == null || protocolName == null) {
+        if (address == null  || coinName == null || merchantUser == null || orderNo == null || protocolName == null || feeAmount == null) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
         Map<String,Object> map = new HashMap<>();
@@ -396,7 +396,7 @@ public class PaymentInfo {
         map.put("coinName",coinName);
         map.put("merchantUser",merchantUser);
         map.put("orderNo",orderNo);
-//        map.put("secretSign",secertSign);
+        map.put("feeAmount",feeAmount);
         map.put("timeStamp",timestamp);
         map.put("orderType",orderType);
         map.put("protocolName",protocolName);
