@@ -190,7 +190,9 @@ public class PaymentInfo {
         Map<String,Object> map = new HashMap<>();
         map.put("appId",Constants.getAppId());
         map.put("expireTime",Constants.getExpireTime());
-        map.put("merchantUser",merchantUser);
+        if (merchantUser != null && !merchantUser.isEmpty()) {
+            map.put("merchantUser",merchantUser);
+        }
         map.put("orderNo",orderNo);
         map.put("orderType",orderType);
         map.put("subject",subject);
