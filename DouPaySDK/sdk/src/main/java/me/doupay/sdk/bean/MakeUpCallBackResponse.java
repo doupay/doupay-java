@@ -113,7 +113,7 @@ public class MakeUpCallBackResponse {
         this.orderNo = orderNo;
     }
 
-    public MakeUpCallBackResponse(String orderCode, String orderType, String coinName, String protocolName, String price, String address, String amountPaid, Boolean result, Integer paymentStatus, String money, String orderNo) {
+    public MakeUpCallBackResponse(String orderCode, String orderType, String coinName, String protocolName, String price, String address, String amountPaid, String money, Boolean result, Integer paymentStatus, String orderNo) {
         this.orderCode = orderCode;
         this.orderType = orderType;
         this.coinName = coinName;
@@ -121,9 +121,9 @@ public class MakeUpCallBackResponse {
         this.price = price;
         this.address = address;
         this.amountPaid = amountPaid;
+        this.money = money;
         this.result = result;
         this.paymentStatus = paymentStatus;
-        this.money = money;
         this.orderNo = orderNo;
     }
 

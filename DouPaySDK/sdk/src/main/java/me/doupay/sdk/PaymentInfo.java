@@ -367,11 +367,11 @@ public class PaymentInfo {
      * @param merchantUser     	   商家用户【长度10到20之间】
      * @param orderNo              订单号【长度10到30】
      */
-    public  static BaseVo<WithdrawResponse> withdraw(String protocolName,String address,String amount,CoinNameEnum coinName,String merchantUser,String orderNo,String money,OrderTypeCodeEnum orderType,CurrencyCodeEnum currencyCode,String feeAmount) {
+    public  static BaseVo<WithdrawResponse> withdraw(String protocolName,String address,String amount,CoinNameEnum coinName,String merchantUser,String orderNo,String money,OrderTypeCodeEnum orderType,CurrencyCodeEnum currencyCode) {
         if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
-        if (address == null  || coinName == null || merchantUser == null || orderNo == null || protocolName == null || feeAmount == null) {
+        if (address == null  || coinName == null || merchantUser == null || orderNo == null || protocolName == null) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
         Map<String,Object> map = new HashMap<>();
@@ -396,7 +396,7 @@ public class PaymentInfo {
         map.put("coinName",coinName);
         map.put("merchantUser",merchantUser);
         map.put("orderNo",orderNo);
-        map.put("feeAmount",feeAmount);
+//        map.put("feeAmount",feeAmount);
         map.put("timeStamp",timestamp);
         map.put("orderType",orderType);
         map.put("protocolName",protocolName);
@@ -540,7 +540,6 @@ public class PaymentInfo {
             Boolean result = jsonObject.getBoolean("result");
             String orderNo = jsonObject.getString("orderNo");
             UserWithdrawCallBackResponse userWithdrawCallBackResponse =  new UserWithdrawCallBackResponse(orderCode,type,coinName,protocolName,address,amount,result,price,money,currency,hashId,orderNo);
-
             withdrawCalllBack.onFinish(userWithdrawCallBackResponse);
         }
         else if (type.equals("makeUp")) { /// 补单
@@ -558,7 +557,7 @@ public class PaymentInfo {
             Integer paymentStatus = jsonObject.getInt("paymentStatus");
             Boolean result = jsonObject.getBoolean("result");
             String orderNo = jsonObject.getString("orderNo");
-            MakeUpCallBackResponse make = new MakeUpCallBackResponse(orderCode,type,coinName,protocolName,price,address,amountPaid,result,paymentStatus,money,orderNo);
+            MakeUpCallBackResponse make = new MakeUpCallBackResponse(orderCode,type,coinName,protocolName,price,address,amountPaid,money,result,paymentStatus,orderNo);
             makeUpCallBackResponseCallBack.onFinish(make);
         }
     }

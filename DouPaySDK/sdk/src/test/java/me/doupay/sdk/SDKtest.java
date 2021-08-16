@@ -47,7 +47,7 @@ public class SDKtest {
         Constants.openSysLog = true;
         Constants.setBasrUrl("http://192.168.11.113:9000/");
         Constants.getInstance().init(secret,privateKey,publicKey,appId,"3600");
-        Constants.setLanguage(Language.zh_TW);
+//        Constants.setLanguage(Language.zh_TW);
     }
 
     @Test
@@ -163,7 +163,7 @@ public class SDKtest {
     public void withdraw() {
         initAllParameters();
         String orderNo = "SHYH" + String.valueOf(System.currentTimeMillis());
-        BaseVo<WithdrawResponse> baseVo = PaymentInfo.withdraw("TRC20","TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "5", CoinNameEnum.USDT, orderNo, orderNo,"500",OrderTypeCodeEnum.BY_AMOUNT,CurrencyCodeEnum.CNY,"0");
+        BaseVo<WithdrawResponse> baseVo = PaymentInfo.withdraw("TRC20","TEQrvHyU54YibVHMGb7475n8y3mXBofaaR", "8", CoinNameEnum.USDT, orderNo, orderNo,"500",OrderTypeCodeEnum.BY_AMOUNT,CurrencyCodeEnum.CNY);
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
