@@ -5,7 +5,7 @@ import me.doupay.sdk.net.Language;
 public class Constants {
     private static Constants constants;
     public static boolean openSysLog = false;
-    public static  String basrUrl = "http://pay.apipay.one/";
+    public static  String basrUrl = "https://pay.apipay.one/";
     public static Language language = Language.zh_CN;
 
     public static Constants getInstance() {
