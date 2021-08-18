@@ -19,45 +19,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * 最全的接口
+ * 没有展示的接口
  */
-public class PaymentInfo {
-    /**
-     * 获取币种列表
-     */
-    public static BaseVo<CoinResponseData>  getCoinList () {
-        if (!Constants.getInstance().isInitAllParameters()) {
-            return new BaseVo<>(9999, ApiString.Companion.getString(ApiString.ApiParameteInitError));
-        }
-        Map<String,Object> map = new HashMap<>();
-        map.put("test","test");
-        Call<BaseVo<CoinResponseData>> coinList = ServerApi.SERVICE_API.getCoinList(Constants.basrUrl + "trade/getCoinList", map);
-        try {
-            BaseVo<CoinResponseData> body = coinList.execute().body();
-            return body;
-        }catch (Exception e) {
-            return new BaseVo<>(9999,e.getMessage());
-        }
-    }
-
-    /**
-     * 获取法币列表
-     */
-    public static BaseVo<CurrencyResponseData> getCurrencyList() {
-        if (!Constants.getInstance().isInitAllParameters()) {
-            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
-
-        }
-        Map<String,Object> map = new HashMap<>();
-        map.put("test","test");
-      Call<BaseVo<CurrencyResponseData>> currentList =  ServerApi.SERVICE_API.getCurrencyList(Constants.basrUrl + "trade/getCurrencyList",map);
-        try {
-            BaseVo<CurrencyResponseData> body = currentList.execute().body();
-            return body;
-        }catch (Exception e) {
-            return new BaseVo<>(9999,e.getMessage());
-        }
-    }
+public class SimplePaymentInfo {
 
     /**
      *
@@ -80,63 +44,6 @@ public class PaymentInfo {
         }
     }
 
-    /**
-     * 获取订单信息
-     * @param orderCode 订单号【长度20到50】
-     */
-    public  static   BaseVo<OrderInfoResponseData> getOrderInfo(String orderCode) {
-        if (!Constants.getInstance().isInitAllParameters()) {
-            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
-        }
-
-
-        if (orderCode == null || orderCode.isEmpty()) {
-            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
-        }
-
-        Map<String,Object> map = new HashMap<>();
-        map.put("orderCode",orderCode);
-        Call<BaseVo<OrderInfoResponseData>> orderInfo = ServerApi.SERVICE_API.getOrderInfo(Constants.basrUrl + "trade/getOrderInfo",map);
-        try {
-            BaseVo<OrderInfoResponseData> body = orderInfo.execute().body();
-            return body;
-        }catch (Exception e) {
-            return new BaseVo<>(9999,e.getMessage());
-        }
-    }
-/*
-
- */
-
-    /**
-     * 获取支付信息
-     * @param coinName  币种名称
-     * @param chainCoinCode 链币种代码【长度4】,非必传
-     * @param orderCode 订单号【长度10到30】
-     */
-    public static  BaseVo<PaymentInfoResponseData> getPaymentInfo (CoinNameEnum coinName,String chainCoinCode, String orderCode) {
-        if (!Constants.getInstance().isInitAllParameters()) {
-            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
-        }
-
-        if (orderCode == null || coinName == null || orderCode.isEmpty()) {
-            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
-        }
-
-        Map<String,Object> map = new HashMap<>();
-        map.put("coinName",coinName);
-        map.put("orderCode",orderCode);
-        if (chainCoinCode != null && !chainCoinCode.isEmpty()) {
-            map.put("chainCoinCode",chainCoinCode);
-        }
-        Call<BaseVo<PaymentInfoResponseData>> paymentInfo = ServerApi.SERVICE_API.getPaymentInfo(Constants.basrUrl + "trade/getPaymentInfo",map);
-        try {
-            BaseVo<PaymentInfoResponseData> body = paymentInfo.execute().body();
-            return body;
-        }catch (Exception e) {
-            return new BaseVo<>(9999,e.getMessage());
-        }
-    }
 
     /**
      * 付款,当orderType为0001时,amount内容为金额,currencyCode为必传,当orderType为0002时amount内容为数量,coinName为必传
@@ -150,11 +57,11 @@ public class PaymentInfo {
      * @param description   附加说明【长度10到50】
      * @param orderType     订单类型(BY_AMOUNT、BY_MONEY)
      */
-    public  static  BaseVo<PayResponseData>  pay ( String money,
-            String amount, CoinNameEnum coinName, CurrencyCodeEnum currencyCode,
-            String merchantUser, String orderNo, String subject,
-            String body, String description,
-            OrderTypeCodeEnum orderType ) {
+    public  static  BaseVo<PayResponseData>  pay( String money,
+                                                   String amount, CoinNameEnum coinName, CurrencyCodeEnum currencyCode,
+                                                   String merchantUser, String orderNo, String subject,
+                                                   String body, String description,
+                                                   OrderTypeCodeEnum orderType ) {
         if (!Constants.getInstance().isInitAllParameters()) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
         }
@@ -168,7 +75,7 @@ public class PaymentInfo {
 
         if ( orderNo == null || orderType == null
                 || subject == null ||  orderNo.isEmpty()  || subject.isEmpty()
-            ) {
+        ) {
             return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
         }
 
@@ -251,54 +158,6 @@ public class PaymentInfo {
         }
     }
 
-    /**
-     * 查询回调
-     * @param orderCode  orderCode
-     * @return
-     */
-    public static BaseVo<PaymentCallBackResponse> getCallback(String orderCode) {
-        if (!Constants.getInstance().isInitAllParameters()) {
-            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
-
-        }
-        if (orderCode == null || orderCode.equals("")) {
-            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
-        }
-
-        Map<String,Object> map = new HashMap<>();
-        map.put("orderCode",orderCode);
-        Call<BaseVo<PaymentCallBackResponse>> baseVoCall =  ServerApi.SERVICE_API.getCallback(Constants.basrUrl + "trade/getCallback",map);
-        try {
-            BaseVo<PaymentCallBackResponse> body = baseVoCall.execute().body();
-            return body;
-        }catch (Exception e) {
-            return new BaseVo<>(9999,e.getMessage());
-        }
-    }
-
-        /**
-         * 取消订单
-         * @param orderCode 订单号
-         */
-    public static BaseVo<PayResponseData> cancleOrder (String orderCode) {
-        if (!Constants.getInstance().isInitAllParameters()) {
-            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
-
-        }
-        if (orderCode == null || orderCode.equals("")) {
-            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiDismissParameterError));
-        }
-        Map<String,Object> map = new HashMap<>();
-        map.put("orderCode",orderCode);
-
-        Call<BaseVo<PayResponseData>> baseVoCall =  ServerApi.SERVICE_API.cancleOrder(Constants.basrUrl + "trade/cancel",map);
-        try {
-            BaseVo<PayResponseData> body = baseVoCall.execute().body();
-            return body;
-        }catch (Exception e) {
-            return new BaseVo<>(9999,e.getMessage());
-        }
-    }
 
     /**
      * 退款
@@ -441,35 +300,6 @@ public class PaymentInfo {
         }
     }
 
-    /**
-     * 获取账单
-     * @param startTime 开始时间
-     * @param endTime 结束时间
-     * @param pageSize 数量
-     * @param pageNo 页数
-     */
-    public  static BaseVo<BillRecord> getBillRecords( LocalDateTime startTime,LocalDateTime endTime,Integer pageSize,Integer pageNo) {
-        if (!Constants.getInstance().isInitAllParameters()) {
-            return new BaseVo<>(9999,ApiString.Companion.getString(ApiString.ApiParameteInitError));
-        }
-        Map<String,Object> map = new HashMap<>();
-        map.put("appId",Constants.getAppId());
-        map.put("pageSize",pageSize);
-        map.put("pageNo",pageNo);
-        if (startTime != null) {
-            map.put("startTime",startTime);
-        }
-        if (endTime != null) {
-            map.put("endTime",endTime);
-        }
-        Call<BaseVo<BillRecord>> baseVoCall = ServerApi.SERVICE_API.getBillRecord(Constants.basrUrl + "trade/getBill",map);
-        try {
-            BaseVo<BillRecord> body = baseVoCall.execute().body();
-            return body;
-        }catch (Exception e) {
-            return new BaseVo<>(9999,e.getMessage());
-        }
-    }
 
     /**
      * 验证回调签名并组装回调对象
@@ -578,7 +408,7 @@ public class PaymentInfo {
         Map<String, Object> treeMap = new TreeMap<>();
 
         for (String key : jsonObject.keySet()) {
-                treeMap.put(key, jsonObject.get(key));
+            treeMap.put(key, jsonObject.get(key));
 
         }
 
@@ -594,5 +424,4 @@ public class PaymentInfo {
         }
         return sb.toString().substring(0, sb.length() - 1);
     }
-
 }

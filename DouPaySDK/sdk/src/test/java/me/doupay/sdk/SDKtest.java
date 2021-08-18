@@ -104,7 +104,7 @@ public class SDKtest {
     @Test
     public void getOrderInfo() {
         initAllParameters();
-        BaseVo<OrderInfoResponseData> baseVo = PaymentInfo.getOrderInfo("ZF202108160322192139154753");
+        BaseVo<OrderInfoResponseData> baseVo = PaymentInfo.getOrderInfo("ZF202108180540250532839870");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {

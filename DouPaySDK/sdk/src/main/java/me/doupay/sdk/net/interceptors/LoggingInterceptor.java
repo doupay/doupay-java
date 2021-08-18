@@ -150,9 +150,10 @@ public class LoggingInterceptor implements Interceptor {
         for (String key : headerMap.keySet()) {
             requestBuilder.addHeader(key, headerMap.get(key));
         }
-        requestBuilder.addHeader("X-Merchant-sign", RSAUtils.sign(Constants.getPrivateKey(), sign));
+        if (!request.url().toString().contains("openApi")) {
+            requestBuilder.addHeader("X-Merchant-sign", RSAUtils.sign(Constants.getPrivateKey(), sign));
+        }
         request = requestBuilder.build();
-        System.out.println( "|||||||||||||||||" + RSAUtils.sign(Constants.getPrivateKey(), sign) + "|||||||||||||||||");
         final RequestBody requestBody = request.body();
 
         String rSubtype = null;
