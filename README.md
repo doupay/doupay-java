@@ -40,6 +40,8 @@ Constants.setLanguage(Language.en_US);/// 英文
 ```
 #### secret为商户管理后台创建app得到的,appid为创建app得到的,privateKey为自己的私钥,publicKey为交换公钥后得到的平台公钥,expireTime为订单过期时间,秒为单位,expireTime大于1800秒,小于7200秒
 
+### 注意事项:使用完整功能的请使用PaymentInfo类,使用部分功能的请使用类SimplePaymentInfo,SimplePaymentInfo类中没有获取订单信息,支付信息,取消接口,这些功能由接入的h5完成
+
 ## sdk中各方法请求和响应参数,请参照[wiki](https://github.com/doupay/doupay-java/wiki)
 
 <!-- ## 2.jar包引入
