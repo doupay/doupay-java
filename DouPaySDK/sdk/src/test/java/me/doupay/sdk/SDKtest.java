@@ -93,7 +93,7 @@ public class SDKtest {
     public void cancle() {
         initAllParameters();
 
-        BaseVo<PayResponseData> baseVo =  PaymentInfo.cancleOrder("ZF202108131023134048733642");
+        BaseVo<PayResponseData> baseVo =  PaymentInfo.cancleOrder("ZF202108190219318429919697");
         if (baseVo.getCode() == 200) {
             System.out.println("-------------------------" + baseVo.getData().toString());
         }else {
